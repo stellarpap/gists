@@ -56,6 +56,29 @@ create (:Scheduled_task{name:'AutoCancelPNR'});
 create (:Scheduled_task{name:'FlightsToCRM'});
 create (:Application:PaliaMalakia{name:'OldCRM'});
 create (:Scheduled_task{name:'SabrePoolAgent'});
+create (:Service:Windows{name:'AutoticketingServiceWorkerService'});
+create (:Database{name:'Autoticketing'});
+
+match (a:Service {name: 'AutoticketingServiceWorkerService'}), (b:Server {name: 'PDBACK-STAGING'})
+create (a)-[:DEPLOYED_ON]->(b);
+
+match (a:Service {name: 'AutoticketingServiceWorkerService'}), (b:Database {name: 'Autoticketing'})
+create (a)-[:READS_FROM]->(b);
+
+match (a:Service {name: 'AutoticketingServiceWorkerService'}), (b:Service {name: 'Amadeus'})
+create (a)-[:CALLS]->(b);
+
+match (a:Service {name: 'AutoticketingServiceWorkerService'}), (b:Service {name: 'Sabre'})
+create (a)-[:CALLS]->(b);
+
+match (a:Database {name: 'Autoticketing'}), (b:Database {name: 'FlightToCrm'})
+create (a)-[:STORES_IN]->(b);
+
+match (a:Service {name: 'flights'}), (b:Database {name: 'Autoticketing'})
+create (a)-[:STORES_IN]->(b);
+
+match (a:DatabaseServer {brand: 'Redis'}), (b:Database {name: 'Autoticketing'})
+create (a)-[:HOSTS]->(b);
 
 match (a:Scheduled_task {name: 'SabrePoolAgent'}), (b:Server {name: 'PDBACK-STAGING'})
 create (a)-[:DEPLOYED_ON]->(b);
