@@ -211,7 +211,7 @@ match (a:Service {name: 'flights'}), (b:Application {name: 'iOS'})
 create (a)-[:CALLED_BY]->(b);
 
 
-MATCH (n:Service {name:"flights"})-[:HOSTS]->(m:Server)
+MATCH (n:Service {name:"flights"})-[:HOSTS]->(m:Database)
 return n, m;
 
 
