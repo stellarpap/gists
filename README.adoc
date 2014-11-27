@@ -210,11 +210,11 @@ create (a)-[:CALLED_BY]->(b);
 match (a:Service {name: 'flights'}), (b:Application {name: 'iOS'})
 create (a)-[:CALLED_BY]->(b);
 
-MATCH (n)
-RETURN distinct labels(n);
+//MATCH (n)
+//RETURN distinct labels(n);
 
-MATCH (My_bookings:Service) -[:DEPLOYED_ON]->(server)
-RETURN server
+MATCH (My_bookings)-[:DEPLOYED_ON]->(server)
+RETURN server;
 
 ----
 
