@@ -8,16 +8,16 @@ This repo contains content for use at http://gist.neo4j.org/.
 ----
 create (Flights_Service:Service:Rest{Endpoint:'http://flights-v2.staging.api.e-travel.gr'}) 
 create (Flights_Server:Server{Name:'SDIAK-STAGING',IP:'10.227.1.47'})
-create (Flights_MSSQL_Database:DatabaseServer{brand:'MSSQL'})
-create (Flights_Dreamflight_Database:Database{name:'Dreamflight'})
-create (Flights_Dreamflight_Database:Database{name:'Affiliates'})
-create (Flights_Dreamflight_Database:Database{name:'CommonInformation'})
-create (Flights_Dreamflight_Database:Database{name:'TravelInsurancesDB'})
-create (Flights_Dreamflight_Database:Database{name:'Rapida'})
-create (Flights_Dreamflight_Database:Database{name:'SabreSession'})
-create (Flights_Dreamflight_Database:Database{name:'Payments'})
-create (Flights_FlightsStateStorageStaging_Database:Database{name:'FlightsStateStorageStaging'})
-create (Flights_FlightsStateStorageStaging_Database:Database{name:'FlightsStateStorageStaging'})
+create (Flights_MSSQL_DB:DatabaseServer{brand:'MSSQL'})
+create (Flights_Dreamflight_DB:Database{name:'Dreamflight'})
+create (Affiliates_DB:Database{name:'Affiliates'})
+create (CommonInformation_DB:Database{name:'CommonInformation'})
+create (TravelInsurancesDB_DB:Database{name:'TravelInsurancesDB'})
+create (Rapida_DB:Database{name:'Rapida'})
+create (SabreSession_DB:Database{name:'SabreSession'})
+create (Payments_DB:Database{name:'Payments'})
+create (FlightsStateStorageStaging_DB:Database{name:'FlightsStateStorageStaging'})
+create (FlightsStateStorage_DB:Database{name:'FlightsStateStorageStaging'})
 
 
 return Flights_Service, Flights_Server, Flights_MSSQL_Database, Flights_Dreamflight_Database
