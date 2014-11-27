@@ -18,9 +18,11 @@ create (SabreSession_DB:Database{name:'SabreSession'})
 create (Payments_DB:Database{name:'Payments'})
 create (FlightsStateStorageStaging_DB:Database{name:'FlightsStateStorageStaging'})
 create (FlightsStateStorage_DB:Database{name:'FlightsStateStorageStaging'})
+create (Flights_CouchBase_DB:DatabaseServer{brand:'CouchBase'})
+create (Flights_CouchDB_DB:DatabaseServer{brand:'CouchDB'})
+create (Flights_Service)-[:DEPLOYD_IN]->(Flights_Server)
 
-
-return Flights_Service, Flights_Server, Flights_MSSQL_Database, Flights_Dreamflight_Database
+return Flights_Service, Flights_Server
 
 
 
