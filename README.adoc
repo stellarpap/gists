@@ -23,8 +23,8 @@ create (:DatabaseServer{brand:'CouchBase'});
 create (:DatabaseServer{brand:'CouchDB'});
 
 
-match (a:Service {name: 'flight_service'}), (b:Service {name: 'x'})
-create (a)-[:x]->(b);
+match (a:Service {name: 'flight_service'}), (b:Server {name: 'SDIAK-STAGING'})
+create (a)-[:DEPLOYD_ON]->(b);
 
 
 
