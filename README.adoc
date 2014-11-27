@@ -6,7 +6,7 @@ This repo contains content for use at http://gist.neo4j.org/.
 
 [source,cypher]
 ----
-create (service{name:'Flights_Service'})-[:DEPENDS_ON]->(service{name:'Currency_Service'})
+create (Flights_Service{type:'Service'})-[:DEPENDS_ON]->(Currency_Service{type:'Service'}) return Flights_Service,Currency_Service
 
 create (n{name: 'Hello'})-[:WHAT]->(m{name: 'World'}) return n, m;
 ----
