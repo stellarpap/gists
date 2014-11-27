@@ -53,6 +53,17 @@ create (:Scheduled_task{name:'Affiliates_Sales_Updater'});
 create (:SNS{name:'Sales'});
 create (:Server{name:'PDBACK-STAGING',ip:'10.227.1.154'});
 create (:Scheduled_task{name:'AutoCancelPNR'});
+create (:Scheduled_task{name:'FlightsToCRM'});
+create (:Application:PaliaMalakia{name:'OldCRM'});
+
+match (a:Scheduled_task {name: 'FlightsToCRM'}), (b:Server {name: 'PDBACK-STAGING'})
+create (a)-[:DEPLOYED_ON]->(b);
+
+match (a:Scheduled_task {name: 'FlightsToCRM'}), (b:Application {name: 'OldCRM'})
+create (a)-[:STORES_IN]->(b);
+
+match (a:Scheduled_task {name: 'FlightsToCRM'}), (b:Database {name: 'FlightToCrm'})
+create (a)-[:READS_FROM]->(b);
 
 match (a:Scheduled_task {name: 'AutoCancelPNR'}), (b:Server {name: 'PDBACK-STAGING'})
 create (a)-[:DEPLOYED_ON]->(b);
