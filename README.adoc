@@ -156,7 +156,7 @@ create (a)-[:CALLED_BY]->(b);
 match (a:Service {name: 'flights_service'}), (b:Application {name: 'Panoramix'})
 create (a)-[:CALLED_BY]->(b);
 
-match (a:Service {name: 'flights_service'}), (b:Application {name: 'my_bookings_service'})
+match (a:Service {name: 'flights_service'}), (b:Service {name: 'my_bookings_service'})
 create (a)-[:CALLED_BY]->(b);
 
 match (a:Service {name: 'flights_service'}), (b:Application {name: 'Android'})
