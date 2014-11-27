@@ -2,4 +2,11 @@
 
 This repo contains content for use at http://gist.neo4j.org/.
 
+[source,cypher]
+----
+create (n{name: 'Hello'})-[:WHAT]->(m{name: 'World'}) return n, m;
+----
 
+//table
+
+//graph
