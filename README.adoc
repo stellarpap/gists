@@ -8,7 +8,7 @@ This repo contains content for use at http://gist.neo4j.org/.
 ----
 
 create (:Service:Rest{endpoint:'http://flights-v2.staging.api.e-travel.gr',name:'flights_service'});
-create (:Server{name:'SDIAK-STAGING',IP:'10.227.1.47'});
+create (:Server{name:'SDIAK-STAGING',ip:'10.227.1.47'});
 create (:DatabaseServer{brand:'MSSQL'});
 create (:Database{name:'Dreamflight'});
 create (:Database{name:'Affiliates'});
