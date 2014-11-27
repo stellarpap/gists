@@ -8,9 +8,9 @@ This repo contains content for use at http://gist.neo4j.org/.
 ----
 // create (Flights_Service{type:'Service'})-[:DEPENDS_ON]->(Currency_Service{type:'Service'})
 
-create (Flights_Service:Service:Rest)
+create (Flights_Service:Service:Rest)-[:DEPENDS_ON]->(Currency_Service:Service:Rest)
 
-return Flights_Service, labels(Flights_Service)
+return Flights_Service, Currency_Service
 ----
 
 //table
