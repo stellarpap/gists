@@ -93,7 +93,7 @@ match (a:Service {name: 'flights_service'}), (b:Database {name: 'TravelInsurance
 create (a)-[:STORES_IN]->(b);
 
 match (a:Service {name: 'flights_service'}), (b:Database {name: 'Rapida'})
-create (a)<-[:STORES_IN]->(b);
+create (a)-[:STORES_IN]->(b);
 
 match (a:Service {name: 'flights_service'}), (b:Database {name: 'SabreSession'})
 create (a)-[:STORES_IN]->(b);
