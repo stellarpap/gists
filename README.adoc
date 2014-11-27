@@ -27,7 +27,7 @@ create (:Service:External{name:'Amadeus'});
 create (:Service:External{name:'TravelFusion'});
 create (:Service:External{name:'Fraudpointer'});
 create (:Service:External{name:'Perseuss'});
-create (:Service:External{name:'Rapida_ws'});
+create (:Service:WEB{name:'Rapida_ws',Endpoint:'www.trip.ru/payment/rapidaservice.svc/payment_app'});
 create (:Service:External{name:'Piraeus'});
 create (:Service:External{name:'EFG'});
 create (:DatabaseServer{brand:'Redis'});
@@ -40,12 +40,24 @@ create (:Application:Web{name:'Panoramix'});
 create (:Application:Mobile{name:'Android'});
 create (:Application:Mobile{name:'iOS'});
 create (:Service:Rest{Endpoint:'mybookings-v1.staging.api.e-travel.gr',name:'My_bookings'});
-create (:Service:WFC{Endpoint:'flightsws-v1.staging.api.e-travel.gr',name:'flights_ws'});
+create (:Service:WEB{Endpoint:'flightsws-v1.staging.api.e-travel.gr',name:'flights_ws'});
 create (:Server{name:'AWSDIAK-STAGING',ip:'10.227.1.62'});
 create (:Application:External{name:'MetaSearchers'});
 create (:Service:Rest{Endpoint:'affiliates-v1.staging.api.e-travel.gr',name:'Affiliates'});
 create (:Service:Rest{Endpoint:'rapidaservice-v1.staging.api.e-travel.gr',name:'Rapida'});
 create (:Application:Web{name:'DFA'});
+create (:Server{name:'WEBDIAK-STAGING',ip:'10.227.1.89'});
+create (:Application:Web{name:'MyBookings'});
+create (:Application:Web{name:'Affiliates'});
+
+match (a:Application {name: 'Affiliates'}), (b:Server {name: 'WEBDIAK-STAGING'})
+create (a)-[:DEPLOYED_ON]->(b);
+
+match (a:Application {name: 'Affiliates'}), (b:Database {name: 'Affiliates'})
+create (a)-[:STORES_IN]->(b);
+
+match (a:Application {name: 'MyBookings'}), (b:Server {name: 'WEBDIAK-STAGING'})
+create (a)-[:DEPLOYED_ON]->(b);
 
 match (a:Application {name: 'DFA'}), (b:Server {name: 'WEBDIAK-STAGING'})
 create (a)-[:DEPLOYED_ON]->(b);
