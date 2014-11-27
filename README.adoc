@@ -214,7 +214,7 @@ create (a)-[:CALLED_BY]->(b);
 
 
 START n=node(*) 
-where n.Service
+where n:Service
 return n, labels(n);
 
 
