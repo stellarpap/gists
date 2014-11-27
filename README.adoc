@@ -57,7 +57,7 @@ create (:Scheduled_task{name:'FlightsToCRM'});
 create (:Application:PaliaMalakia{name:'OldCRM'});
 create (:Scheduled_task{name:'SabrePoolAgent'});
 create (:Service:Windows{name:'AutoticketingServiceWorkerService'});
-create (:Database{name:'Autoticketing'});
+create (:Queues{name:'Autoticketing'});
 
 
 
