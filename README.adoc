@@ -49,6 +49,18 @@ create (:Application:Web{name:'DFA'});
 create (:Server{name:'WEBDIAK-STAGING',ip:'10.227.1.89'});
 create (:Application:Web{name:'MyBookings'});
 create (:Application:Web{name:'Affiliates'});
+create (:Scheduled_task{name:'Affiliates_Sales_Updater'});
+create (:SNS{name:'Sales'});
+create (:Server{name:'PDBACK-STAGING',ip:'10.227.1.154'});
+
+match (a:Scheduled_task {name: 'Affiliates_Sales_Updater'}), (b:Server {name: 'PDBACK-STAGING'})
+create (a)-[:DEPLOYED_ON]->(b);
+
+match (a:Scheduled_task {name: 'Affiliates_Sales_Updater'}), (b:SNS {name: 'Sales'})
+create (a)-[:READS_FROM]->(b);
+
+match (a:Scheduled_task {name: 'Affiliates_Sales_Updater'}), (b:Database {name: 'Affiliates'})
+create (a)-[:STORES_IN]->(b);
 
 match (a:Application {name: 'Affiliates'}), (b:Server {name: 'WEBDIAK-STAGING'})
 create (a)-[:DEPLOYED_ON]->(b);
