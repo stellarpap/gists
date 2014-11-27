@@ -52,6 +52,16 @@ create (:Application:Web{name:'Affiliates'});
 create (:Scheduled_task{name:'Affiliates_Sales_Updater'});
 create (:SNS{name:'Sales'});
 create (:Server{name:'PDBACK-STAGING',ip:'10.227.1.154'});
+create (:Scheduled_task{name:'AutoCancelPNR'});
+
+match (a:Scheduled_task {name: 'AutoCancelPNR'}), (b:Server {name: 'PDBACK-STAGING'})
+create (a)-[:DEPLOYED_ON]->(b);
+
+match (a:Scheduled_task {name: 'AutoCancelPNR'}), (b:Service {name: 'Sabre'})
+create (a)-[:CALLS]->(b);
+
+match (a:Scheduled_task {name: 'AutoCancelPNR'}), (b:Database {name: 'Dreamflight'})
+create (a)-[:READS_FROM]->(b);
 
 match (a:Scheduled_task {name: 'Affiliates_Sales_Updater'}), (b:Server {name: 'PDBACK-STAGING'})
 create (a)-[:DEPLOYED_ON]->(b);
