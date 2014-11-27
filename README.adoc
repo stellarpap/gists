@@ -29,7 +29,23 @@ create (a)-[:DEPLOYD_ON]->(b);
 match (a:DatabaseServer {brand: 'MSSQL'}), (b:Database {name: 'Dreamflight'})
 create (a)-[:HOSTS]->(b);
 
+match (a:DatabaseServer {brand: 'MSSQL'}), (b:Database {name: 'Affiliates'})
+create (a)-[:HOSTS]->(b);
 
+match (a:DatabaseServer {brand: 'MSSQL'}), (b:Database {name: 'CommonInformation'})
+create (a)-[:HOSTS]->(b);
+
+match (a:DatabaseServer {brand: 'MSSQL'}), (b:Database {name: 'TravelInsurancesDB'})
+create (a)-[:HOSTS]->(b);
+
+match (a:DatabaseServer {brand: 'MSSQL'}), (b:Database {name: 'Rapida'})
+create (a)-[:HOSTS]->(b);
+
+match (a:DatabaseServer {brand: 'MSSQL'}), (b:Database {name: 'SabreSession'})
+create (a)-[:HOSTS]->(b);
+
+match (a:DatabaseServer {brand: 'MSSQL'}), (b:Database {name: 'Payments'})
+create (a)-[:HOSTS]->(b);
 ----
 
 //table
