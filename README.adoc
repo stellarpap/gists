@@ -40,7 +40,6 @@ create (:Application:Web{name:'Panoramix'});
 create (:Application:Mobile{name:'Android'});
 create (:Application:Mobile{name:'iOS'});
 create (:Service:Rest{endpoint:'mybookings-v1.staging.api.e-travel.gr',name:'My_bookings'});
-create (:Server{name:'SDIAK-STAGING',ip:'10.227.1.47'});
 
 
 match (a:Service {name: 'flights'}), (b:Server {name: 'SDIAK-STAGING'})
