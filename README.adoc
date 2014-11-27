@@ -91,6 +91,29 @@ create (a)-[:STORES_IN]->(b);
 match (a:Service {name: 'flights_service'}), (b:Service {name: 'Enett'})
 create (a)-[:CALLS]->(b);
 
+match (a:Service {name: 'flights_service'}), (b:Service {name: 'Sabre'})
+create (a)-[:CALLS]->(b);
+
+match (a:Service {name: 'flights_service'}), (b:Service {name: 'Amadeus'})
+create (a)-[:CALLS]->(b);
+
+match (a:Service {name: 'flights_service'}), (b:Service {name: 'TravelFusion'})
+create (a)-[:CALLS]->(b);
+
+match (a:Service {name: 'flights_service'}), (b:Service {name: 'Fraudpointer'})
+create (a)-[:CALLS]->(b);
+
+match (a:Service {name: 'flights_service'}), (b:Service {name: 'Perseuss'})
+create (a)-[:CALLS]->(b);
+
+match (a:Service {name: 'flights_service'}), (b:Service {name: 'EFG'})
+create (a)-[:CALLS]->(b);
+
+match (a:Service {name: 'flights_service'}), (b:Service {name: 'Rapida'})
+create (a)-[:CALLS]->(b);
+
+match (a:Service {name: 'flights_service'}), (b:Service {name: 'Piraeus'})
+create (a)-[:CALLS]->(b);
 ----
 
 //table
