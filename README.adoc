@@ -337,7 +337,8 @@ create (a)-[:STORES_IN]->(b);
 match (a:Background_runner{name:'Payment backlog'}), (b:Database{name:'CommonInformation'})
 create (a)-[:READS_FROM]->(b);
 
-
+MATCH (n:Service)-[]->(m:Server {name:"SDIAK-STAGING"})
+return n, m;
 
 
 ----
