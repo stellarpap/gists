@@ -337,8 +337,10 @@ create (a)-[:STORES_IN]->(b);
 match (a:Background_runner{name:'Payment backlog'}), (b:Database{name:'CommonInformation'})
 create (a)-[:READS_FROM]->(b);
 
-MATCH (n:Service)-[]->(m:Server {name:"SDIAK-STAGING"})
-return n, m;
+create (:Service{name:'AWS redrive'});
+
+match (a:Background_worker{name:'RealMargin'}), (b:Service{name:'AWS redrive'})
+create (b)-[:SEND_TO]->(a);
 
 
 ----
