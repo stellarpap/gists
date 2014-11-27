@@ -20,6 +20,16 @@ create (:Database{name:'Payments'});
 create (:Database{name:'FlightsStateStorageStaging'});
 create (:DatabaseServer{brand:'CouchBase'});
 create (:DatabaseServer{brand:'CouchDB'});
+create (:AmazonBucket{name:'DFA'});
+create (:Service:External{name:'Enett'});
+create (:Service:External{name:'Sabre'});
+create (:Service:External{name:'Amadeus'});
+create (:Service:External{name:'TravelFusion'});
+create (:Service:External{name:'Fraudpointer'});
+create (:Service:External{name:'Perseuss'});
+create (:Service:External{name:'Rapida'});
+create (:Service:External{name:'Piraeus'});
+create (:Service:External{name:'EFG'});
 
 match (a:Service {name: 'flights_service'}), (b:Server {name: 'SDIAK-STAGING'})
 create (a)-[:DEPLOYED_ON]->(b);
@@ -75,6 +85,11 @@ create (a)-[:STORES_IN]->(b);
 match (a:Service {name: 'flights_service'}), (b:DatabaseServer {brand: 'CouchDB'})
 create (a)-[:STORES_IN]->(b);
 
+match (a:Service {name: 'flights_service'}), (b:AmazonBucket {name: 'DFA'})
+create (a)-[:STORES_IN]->(b);
+
+match (a:Service {name: 'flights_service'}), (b:Service.External {name: 'Enett'})
+create (a)-[:CALLS]->(b);
 
 ----
 
