@@ -10,7 +10,7 @@ This repo contains content for use at http://gist.neo4j.org/.
 
 create (Flights_Service:Service:Rest)
 
-return Flights_Service
+return Flights_Service, labels(Flights_Service)
 ----
 
 //table
