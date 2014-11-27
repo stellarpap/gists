@@ -171,7 +171,7 @@ match (a:Service {name: 'flights'}), (b:Application {name: 'iOS'})
 create (a)-[:CALLED_BY]->(b);
 
 MATCH (n)
-RETURN labels(n);
+RETURN distinct labels(n);
 
 ----
 
