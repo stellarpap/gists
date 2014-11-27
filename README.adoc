@@ -18,7 +18,6 @@ create (:Database{name:'Rapida'});
 create (:Database{name:'SabreSession'});
 create (:Database{name:'Payments'});
 create (:Database{name:'FlightsStateStorageStaging'});
-create (:Database{name:'FlightsStateStorageStaging'});
 create (:DatabaseServer{brand:'CouchBase'});
 create (:DatabaseServer{brand:'CouchDB'});
 
@@ -46,6 +45,19 @@ create (a)-[:HOSTS]->(b);
 
 match (a:DatabaseServer {brand: 'MSSQL'}), (b:Database {name: 'Payments'})
 create (a)-[:HOSTS]->(b);
+
+match (a:DatabaseServer {brand: 'CouchBase'}), (b:Database {name: 'FlightsStateStorageStaging'})
+create (a)-[:HOSTS]->(b);
+
+match (a:Service {brand: 'flights_service'}), (b:DatabaseServer {name: 'MSSQL'})
+create (a)-[:HOSTS]->(b);
+
+match (a:Service {brand: 'flights_service'}), (b:DatabaseServer {name: 'CouchBase'})
+create (a)-[:HOSTS]->(b);
+
+match (a:Service {brand: 'flights_service'}), (b:DatabaseServer {name: 'CouchDB'})
+create (a)-[:HOSTS]->(b);
+
 ----
 
 //table
