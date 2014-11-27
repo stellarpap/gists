@@ -58,14 +58,7 @@ create (a)-[:STORES_IN]->(b);
 match (a:Service {name: 'flights_service'}), (b:DatabaseServer {brand: 'CouchDB'})
 create (a)-[:STORES_IN]->(b);
 
-match (a:Service {name: 'flights_service'}), (b:DatabaseServer {brand: 'MSSQL'})
-create (a)<-[:RETRIEVES_FROM]-(b);
 
-match (a:Service {name: 'flights_service'}), (b:DatabaseServer {brand: 'CouchBase'})
-create (a)<-[:RETRIEVES_FROM]-(b);
-
-match (a:Service {name: 'flights_service'}), (b:DatabaseServer {brand: 'CouchDB'})
-create (a)<-[:RETRIEVES_FROM]-(b);
 
 ----
 
