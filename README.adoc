@@ -35,6 +35,11 @@ create (:Database{name:'FlightToCrm'});
 create (:Database{name:'FlightsConfirmationEmail'});
 create (:Database{name:'FlightRating'});
 create (:Database{name:'FlightToKumquat'});
+create (:Application:Web{name:'LeWeb'});
+create (:Application:Web{name:'Panoramix'});
+create (:Application:Mobile{name:'Android'});
+create (:Application:Mobile{name:'iOS'});
+create (:Service:Rest{endpoint:'mybookings-v1.staging.api.e-travel.gr',name:'my_bookings_service'});
 
 match (a:Service {name: 'flights_service'}), (b:Server {name: 'SDIAK-STAGING'})
 create (a)-[:DEPLOYED_ON]->(b);
@@ -88,7 +93,7 @@ match (a:Service {name: 'flights_service'}), (b:Database {name: 'TravelInsurance
 create (a)-[:STORES_IN]->(b);
 
 match (a:Service {name: 'flights_service'}), (b:Database {name: 'Rapida'})
-create (a)-[:STORES_IN]->(b);
+create (a)<-[:STORES_IN]->(b);
 
 match (a:Service {name: 'flights_service'}), (b:Database {name: 'SabreSession'})
 create (a)-[:STORES_IN]->(b);
@@ -144,6 +149,21 @@ create (a)-[:CALLS]->(b);
 
 match (a:Service {name: 'flights_service'}), (b:Service {name: 'Piraeus'})
 create (a)-[:CALLS]->(b);
+
+match (a:Service {name: 'flights_service'}), (b:Application {name: 'LeWeb'})
+create (a)-[:CALLED_BY]->(b);
+
+match (a:Service {name: 'flights_service'}), (b:Application {name: 'Panoramix'})
+create (a)-[:CALLED_BY]->(b);
+
+match (a:Service {name: 'flights_service'}), (b:Application {name: 'my_bookings_service'})
+create (a)-[:CALLED_BY]->(b);
+
+match (a:Service {name: 'flights_service'}), (b:Application {name: 'Android'})
+create (a)-[:CALLED_BY]->(b);
+
+match (a:Service {name: 'flights_service'}), (b:Application {name: 'iOS'})
+create (a)-[:CALLED_BY]->(b);
 ----
 
 //table
