@@ -213,7 +213,8 @@ create (a)-[:CALLED_BY]->(b);
 
 
 
-start n=(nodes,name,"flights") return n;
+START n=node(*) 
+return n;
 
 
 ----
