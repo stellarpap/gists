@@ -40,10 +40,10 @@ create (:Application:Web{name:'Panoramix'});
 create (:Application:Mobile{name:'Android'});
 create (:Application:Mobile{name:'iOS'});
 create (:Service:Rest{endpoint:'mybookings-v1.staging.api.e-travel.gr',name:'My_bookings'});
-create (:Service:WFC{endpoint:'flightsws-v1.staging.api.e-travel.gr',name:'flights'});
+create (:Service:WFC{endpoint:'flightsws-v1.staging.api.e-travel.gr',name:'flights_ws'});
 create (:Server{name:'AWSDIAK-STAGING',ip:'10.227.1.62'});
 
-match (a:Service:WCF {name: 'flights'}), (b:Server {name: 'AWSDIAK-STAGING'})
+match (a:Service {name: 'flights_ws'}), (b:Server {name: 'AWSDIAK-STAGING'})
 create (a)-[:DEPLOYED_ON]->(b);
 
 match (a:Service {name: 'flights'}), (b:Server {name: 'SDIAK-STAGING'})
