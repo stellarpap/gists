@@ -212,7 +212,7 @@ create (a)-[:CALLED_BY]->(b);
 
 
 MATCH (n:Service {name:"flights"})-[DEPLOYED_ON]->(m:Server)
-return n, m, labels(n);
+return labels(n), labels(m);
 
 
 
