@@ -172,7 +172,6 @@ create (a)-[:CALLED_BY]->(b);
 
 MATCH (n)
 RETURN distinct labels(n);
-
 ----
 
 //table
