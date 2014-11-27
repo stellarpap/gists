@@ -45,6 +45,13 @@ create (:Server{name:'AWSDIAK-STAGING',ip:'10.227.1.62'});
 create (:Application:External{name:'MetaSearchers'});
 create (:Service:Rest{Endpoint:'affiliates-v1.staging.api.e-travel.gr',name:'Affiliates'});
 create (:Service:Rest{Endpoint:'rapidaservice-v1.staging.api.e-travel.gr',name:'Rapida'});
+create (:Application:Web{name:'DFA'});
+
+match (a:Application {name: 'DFA'}), (b:Server {name: 'WEBDIAK-STAGING'})
+create (a)-[:DEPLOYED_ON]->(b);
+
+match (a:Application {name: 'DFA'}), (b:AmazonBucket {name: 'DFA'})
+create (a)-[:STORES_IN]->(b);
 
 match (a:Service {name: 'flights'}), (b:Service {name: 'Rapida'})
 create (a)-[:CALLS]->(b);
@@ -55,7 +62,7 @@ create (a)-[:DEPLOYED_ON]->(b);
 match (a:Service {name: 'Affiliates'}), (b:Database {name: 'Affiliates'})
 create (a)-[:STORES_IN]->(b);
 
-match (a:Service {name: 'flights_ws'}), (b:Application {name: 'MetaSearchers'})
+match (a:Application {name: 'MetaSearchers'}) , (b:Service {name: 'flights_ws'})
 create (a)-[:CALLED_BY]->(b);
 
 match (a:Service {name: 'flights_ws'}), (b:Service {name: 'Anadeus'})
@@ -65,7 +72,7 @@ match (a:Service {name: 'flights_ws'}), (b:Service {name: 'Sabre'})
 create (a)-[:CALLS]->(b);
 
 match (a:Service {name: 'flights_ws'}), (b:AmazonBucket {name: 'DFA'})
-create (a)-[:STORES_IN]->(b);
+create (a)-[:RETRIEVES_FROM]->(b);
 
 match (a:Service {name: 'flights_ws'}), (b:Database {name: 'Dreamflight'})
 create (a)-[:STORES_IN]->(b);
@@ -158,7 +165,7 @@ match (a:Service {name: 'flights'}), (b:DatabaseServer {brand: 'CouchDB'})
 create (a)-[:STORES_IN]->(b);
 
 match (a:Service {name: 'flights'}), (b:AmazonBucket {name: 'DFA'})
-create (a)-[:STORES_IN]->(b);
+create (a)-[:RETRIEVES_FROM]->(b);
 
 match (a:Service {name: 'flights'}), (b:Database {name: 'FlightToCrm'})
 create (a)-[:STORES_IN]->(b);
@@ -200,20 +207,21 @@ create (a)-[:CALLS]->(b);
 match (a:Service {name: 'flights'}), (b:Service {name: 'Piraeus'})
 create (a)-[:CALLS]->(b);
 
-match (a:Service {name: 'flights'}), (b:Application {name: 'LeWeb'})
-create (a)-[:CALLED_BY]->(b);
+match (a:Application {name: 'LeWeb'}) , (b:Service {name: 'flights'})
+create (a)-[:CALLS]->(b);
 
-match (a:Service {name: 'flights'}), (b:Application {name: 'Panoramix'})
-create (a)-[:CALLED_BY]->(b);
+match (a:Application {name: 'Panoramix'}) , (b:Service {name: 'flights'})
+create (a)-[:CALLS]->(b);
 
-match (a:Service {name: 'flights'}), (b:Service {name: 'My_bookings'})
-create (a)-[:CALLED_BY]->(b);
+match (a:Application {name: 'My_bookings'}) , (b:Service {name: 'flights'})
+create (a)-[:CALLS]->(b);
 
-match (a:Service {name: 'flights'}), (b:Application {name: 'Android'})
-create (a)-[:CALLED_BY]->(b);
+match (a:Application {name: 'Android'}) , (b:Service {name: 'flights'})
+create (a)-[:CALLS]->(b);
 
-match (a:Service {name: 'flights'}), (b:Application {name: 'iOS'})
-create (a)-[:CALLED_BY]->(b);
+match (a:Application {name: 'iOS'}) , (b:Service {name: 'flights'})
+create (a)-[:CALLS]->(b);
+
 
 
 
