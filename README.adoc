@@ -27,7 +27,7 @@ create (:Service:External{name:'Amadeus'});
 create (:Service:External{name:'TravelFusion'});
 create (:Service:External{name:'Fraudpointer'});
 create (:Service:External{name:'Perseuss'});
-create (:Service:External{name:'Rapida'});
+create (:Service:External{name:'Rapida_ws'});
 create (:Service:External{name:'Piraeus'});
 create (:Service:External{name:'EFG'});
 create (:DatabaseServer{brand:'Redis'});
@@ -44,8 +44,13 @@ create (:Service:WFC{Endpoint:'flightsws-v1.staging.api.e-travel.gr',name:'fligh
 create (:Server{name:'AWSDIAK-STAGING',ip:'10.227.1.62'});
 create (:Application:External{name:'MetaSearchers'});
 create (:Service:Rest{Endpoint:'affiliates-v1.staging.api.e-travel.gr',name:'Affiliates'});
+create (:Service:Rest{Endpoint:'rapidaservice-v1.staging.api.e-travel.gr',name:'Rapida'});
 
+match (a:Service {name: 'flights'}), (b:Service {name: 'Rapida'})
+create (a)-[:CALLS]->(b);
 
+match (a:Service {name: 'Rapida'}), (b:Server {name: 'SDIAK-STAGING'})
+create (a)-[:DEPLOYED_ON]->(b);
 
 match (a:Service {name: 'Affiliates'}), (b:Database {name: 'Affiliates'})
 create (a)-[:STORES_IN]->(b);
@@ -189,7 +194,7 @@ create (a)-[:CALLS]->(b);
 match (a:Service {name: 'flights'}), (b:Service {name: 'EFG'})
 create (a)-[:CALLS]->(b);
 
-match (a:Service {name: 'flights'}), (b:Service {name: 'Rapida'})
+match (a:Service {name: 'flights'}), (b:Service {name: 'Rapida_ws'})
 create (a)-[:CALLS]->(b);
 
 match (a:Service {name: 'flights'}), (b:Service {name: 'Piraeus'})
@@ -211,8 +216,7 @@ match (a:Service {name: 'flights'}), (b:Application {name: 'iOS'})
 create (a)-[:CALLED_BY]->(b);
 
 
-MATCH (n:Service)-[]->(m:Server {name:"SDIAK-STAGING"})
-return n, m;
+
 
 
 
