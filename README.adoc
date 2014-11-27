@@ -213,7 +213,7 @@ create (a)-[:CALLED_BY]->(b);
 
 
 
-START max=node:service(name = "My_bookings")
+START max=node:Service(name = "My_bookings")
 RETURN max;
 
 
