@@ -214,7 +214,7 @@ create (a)-[:CALLED_BY]->(b);
 
 
 START n=node(*) 
-where n:Server.name = 'flights'
+where n:Service.name = 'flights'
 return n, labels(n);
 
 
