@@ -302,6 +302,41 @@ create (a)-[:CALLS]->(b);
 
 
 
+create (:Service{endpoint:'content-v1.staging.api.e-travel.gr', name: 'Content service'});
+create (:Background_worker{name:'Hotels x-sell_emailer'});
+create (:Background_worker{name:'AIR poster'});
+create (:Service{endpoint:'http://refundservice-v1.staging.api.e-travel.gr/',name:'Refund service'});
+create (:Scheduled_task{name:'Insurance CLI old'});
+create (:Service{endpoint:'http://currencyservice-v1.production.api.e-travel.gr',name:'Currency service v1'});
+create (:Scheduled_task{name:'Currencies updater v2'});
+create (:Background_runner{name:'Payment backlog'});
+create (:Background_worker{name:'RealMargin'});
+create (:Background_runner{name:'RM aggregator'});
+create (:Utility{name:'IURfanout'});
+create (:Service:Rest{endpoint:'http://content-v2.staging.api.e-travel.gr',name:'Content-v2'});
+create (:Service:Rest{endpoint:'http://hotels-v1.stage.api.e-travel.gr',name:'Hotels-v1'});
+create (:Service:Rest{endpoint:'http://hotels-v2.stage.api.e-travel.gr',name:'Hotels-v2'});
+create (:Service:HTTP{endpoint:'http://kumquat-v1.staging.api.e-travel.gr/api-v1.0/',name:'Kumquat API'});
+create (:Database{name:'CurrencyDB'});
+
+match (a:Background_worker{name:'Hotels x-sell_emailer'}), (b:Service {name:'Hotels-v2'})
+create (b)-[:CALL]->(a);
+
+match (a:Service{name:'Refund service'}, (b:Application{name:'Panoramix'})
+create (a)-[:CALLED_BY]->(b);
+
+match (a:Scheduled_task{name:'Insurance CLI old'}, (b:Service {name:'Kumquat API'})
+create (a)-[SEND_TO]->(b);
+
+match (a:Service{name:'Currency service v1'}), (b:Database{name:'CurrencyDB'})
+create (a)-[DEPLOYED]->(b);
+
+match (a:Background_runner{name:'Currencies updater v2'}), (b:Database{name:'CurrencyDB'})
+create (a)-[:STORES_IN]->(b);
+
+match (a:Background_runner{name:'Payment backlog'}), (b:Database{name:'CommonInformation'})
+create (a)-[READS_FROM]->(b);
+
 
 
 
