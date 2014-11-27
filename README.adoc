@@ -211,11 +211,8 @@ match (a:Service {name: 'flights'}), (b:Application {name: 'iOS'})
 create (a)-[:CALLED_BY]->(b);
 
 
+MATCH (n:Service {name:"flights"}) return server(n), labels(n);
 
-
-START n=node(*) 
-where n:Service.name = 'flights'
-return n, labels(n);
 
 
 ----
