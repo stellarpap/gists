@@ -326,16 +326,16 @@ match (a:Service{name:'Refund service'}), (b:Application{name:'Panoramix'})
 create (a)-[:CALLED_BY]->(b);
 
 match (a:Scheduled_task{name:'Insurance CLI old'}), (b:Service {name:'Kumquat API'})
-create (a)-[SEND_TO]->(b);
+create (a)-[:SEND_TO]->(b);
 
 match (a:Service{name:'Currency service v1'}), (b:Database{name:'CurrencyDB'})
-create (a)-[DEPLOYED]->(b);
+create (a)-[:DEPLOYED]->(b);
 
 match (a:Background_runner{name:'Currencies updater v2'}), (b:Database{name:'CurrencyDB'})
 create (a)-[:STORES_IN]->(b);
 
 match (a:Background_runner{name:'Payment backlog'}), (b:Database{name:'CommonInformation'})
-create (a)-[READS_FROM]->(b);
+create (a)-[:READS_FROM]->(b);
 
 
 
