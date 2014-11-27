@@ -88,7 +88,7 @@ create (a)-[:STORES_IN]->(b);
 match (a:Service {name: 'flights_service'}), (b:AmazonBucket {name: 'DFA'})
 create (a)-[:STORES_IN]->(b);
 
-match (a:Service {name: 'flights_service'}), (b:Service.External {name: 'Enett'})
+match (a:Service {name: 'flights_service'}), (b:Service {name: 'Enett'})
 create (a)-[:CALLS]->(b);
 
 ----
