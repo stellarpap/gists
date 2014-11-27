@@ -43,7 +43,7 @@ create (:Service:Rest{endpoint:'mybookings-v1.staging.api.e-travel.gr',name:'My_
 create (:Service:WFC{endpoint:'flightsws-v1.staging.api.e-travel.gr',name:'Flights'});
 create (:Server{name:'AWSDIAK-STAGING',ip:'10.227.1.62'});
 
-match (a:WCF {name: 'flights'}), (b:Server {name: 'AWSDIAK-STAGING'})
+match (a:WCF {name: 'Flights'}), (b:Server {name: 'AWSDIAK-STAGING'})
 create (a)-[:DEPLOYED_ON]->(b);
 
 match (a:Service {name: 'flights'}), (b:Server {name: 'SDIAK-STAGING'})
