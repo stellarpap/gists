@@ -322,10 +322,10 @@ create (:Database{name:'CurrencyDB'});
 match (a:Background_worker{name:'Hotels x-sell_emailer'}), (b:Service {name:'Hotels-v2'})
 create (b)-[:CALL]->(a);
 
-match (a:Service{name:'Refund service'}, (b:Application{name:'Panoramix'})
+match (a:Service{name:'Refund service'}), (b:Application{name:'Panoramix'})
 create (a)-[:CALLED_BY]->(b);
 
-match (a:Scheduled_task{name:'Insurance CLI old'}, (b:Service {name:'Kumquat API'})
+match (a:Scheduled_task{name:'Insurance CLI old'}), (b:Service {name:'Kumquat API'})
 create (a)-[SEND_TO]->(b);
 
 match (a:Service{name:'Currency service v1'}), (b:Database{name:'CurrencyDB'})
