@@ -6,7 +6,7 @@ This repo contains content for use at http://gist.neo4j.org/.
 
 [source,cypher]
 ----
-
+//Flights Service v2
 create (:Service:Rest{endpoint:'http://flights-v2.staging.api.e-travel.gr',name:'flights_service'});
 create (:Server{name:'SDIAK-STAGING',ip:'10.227.1.47'});
 create (:DatabaseServer{brand:'MSSQL'});
@@ -20,7 +20,6 @@ create (:Database{name:'Payments'});
 create (:Database{name:'FlightsStateStorageStaging'});
 create (:DatabaseServer{brand:'CouchBase'});
 create (:DatabaseServer{brand:'CouchDB'});
-
 
 match (a:Service {name: 'flights_service'}), (b:Server {name: 'SDIAK-STAGING'})
 create (a)-[:DEPLOYED_ON]->(b);
@@ -49,15 +48,32 @@ create (a)-[:HOSTS]->(b);
 match (a:DatabaseServer {brand: 'CouchBase'}), (b:Database {name: 'FlightsStateStorageStaging'})
 create (a)-[:HOSTS]->(b);
 
-match (a:Service {name: 'flights_service'}), (b:DatabaseServer {brand: 'MSSQL'})
+match (a:Service {name: 'flights_service'}), (b:Database {name: 'Dreamflight'})
 create (a)-[:STORES_IN]->(b);
 
-match (a:Service {name: 'flights_service'}), (b:DatabaseServer {brand: 'CouchBase'})
+match (a:Service {name: 'flights_service'}), (b:Database {name: 'Affiliates'})
+create (a)-[:STORES_IN]->(b);
+
+match (a:Service {name: 'flights_service'}), (b:Database {name: 'CommonInformation'})
+create (a)-[:STORES_IN]->(b);
+
+match (a:Service {name: 'flights_service'}), (b:Database {name: 'TravelInsurancesDB'})
+create (a)-[:STORES_IN]->(b);
+
+match (a:Service {name: 'flights_service'}), (b:Database {name: 'Rapida'})
+create (a)-[:STORES_IN]->(b);
+
+match (a:Service {name: 'flights_service'}), (b:Database {name: 'SabreSession'})
+create (a)-[:STORES_IN]->(b);
+
+match (a:Service {name: 'flights_service'}), (b:Database {name: 'Payments'})
+create (a)-[:STORES_IN]->(b);
+
+match (a:Service {name: 'flights_service'}), (b:Database {name: 'FlightsStateStorageStaging'})
 create (a)-[:STORES_IN]->(b);
 
 match (a:Service {name: 'flights_service'}), (b:DatabaseServer {brand: 'CouchDB'})
 create (a)-[:STORES_IN]->(b);
-
 
 
 ----
