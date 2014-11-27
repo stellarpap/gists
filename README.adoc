@@ -26,7 +26,7 @@ create (:DatabaseServer{brand:'CouchDB'});
 match (a:Service {name: 'flights_service'}), (b:Server {name: 'SDIAK-STAGING'})
 create (a)-[:DEPLOYD_ON]->(b);
 
-match (a:DatabaseServer {brand: 'MSSQL'}), (b:Database {name: 'Dreamflights'})
+match (a:DatabaseServer {brand: 'MSSQL'}), (b:Database {name: 'Dreamflight'})
 create (a)-[:HOSTS]->(b);
 
 
