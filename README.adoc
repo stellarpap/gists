@@ -30,6 +30,11 @@ create (:Service:External{name:'Perseuss'});
 create (:Service:External{name:'Rapida'});
 create (:Service:External{name:'Piraeus'});
 create (:Service:External{name:'EFG'});
+create (:DatabaseServer{brand:'Redis'});
+create (:Database{name:'FlightToCrm'});
+create (:Database{name:'FlightsConfirmationEmail'});
+create (:Database{name:'FlightRating'});
+create (:Database{name:'FlightToKumquat'});
 
 match (a:Service {name: 'flights_service'}), (b:Server {name: 'SDIAK-STAGING'})
 create (a)-[:DEPLOYED_ON]->(b);
@@ -56,6 +61,18 @@ match (a:DatabaseServer {brand: 'MSSQL'}), (b:Database {name: 'Payments'})
 create (a)-[:HOSTS]->(b);
 
 match (a:DatabaseServer {brand: 'CouchBase'}), (b:Database {name: 'FlightsStateStorageStaging'})
+create (a)-[:HOSTS]->(b);
+
+match (a:DatabaseServer {brand: 'Redis'}), (b:Database {name: 'FlightToCrm'})
+create (a)-[:HOSTS]->(b);
+
+match (a:DatabaseServer {brand: 'Redis'}), (b:Database {name: 'FlightsConfirmationEmail'})
+create (a)-[:HOSTS]->(b);
+
+match (a:DatabaseServer {brand: 'Redis'}), (b:Database {name: 'FlightRating'})
+create (a)-[:HOSTS]->(b);
+
+match (a:DatabaseServer {brand: 'Redis'}), (b:Database {name: 'FlightToKumquat'})
 create (a)-[:HOSTS]->(b);
 
 match (a:Service {name: 'flights_service'}), (b:Database {name: 'Dreamflight'})
@@ -87,6 +104,19 @@ create (a)-[:STORES_IN]->(b);
 
 match (a:Service {name: 'flights_service'}), (b:AmazonBucket {name: 'DFA'})
 create (a)-[:STORES_IN]->(b);
+
+match (a:Service {name: 'flights_service'}), (b:Database {name: 'FlightToCrm'})
+create (a)-[:STORES_IN]->(b);
+
+match (a:Service {name: 'flights_service'}), (b:Database {name: 'FlightsConfirmationEmail'})
+create (a)-[:STORES_IN]->(b);
+
+match (a:Service {name: 'flights_service'}), (b:Database {name: 'FlightRating'})
+create (a)-[:STORES_IN]->(b);
+
+match (a:Service {name: 'flights_service'}), (b:Database {name: 'FlightToKumquat'})
+create (a)-[:STORES_IN]->(b);
+
 
 match (a:Service {name: 'flights_service'}), (b:Service {name: 'Enett'})
 create (a)-[:CALLS]->(b);
