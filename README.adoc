@@ -210,9 +210,14 @@ create (a)-[:CALLED_BY]->(b);
 match (a:Service {name: 'flights'}), (b:Application {name: 'iOS'})
 create (a)-[:CALLED_BY]->(b);
 
+//MATCH (n)
+RETURN distinct labels(n);
 
 
-MATCH (My_bookings)-[:DEPLOYED_ON]->(server)
+START max=node:service(name = "My_bookings")
+RETURN max;
+
+//MATCH (My_bookings)-[:DEPLOYED_ON]->(server)
 RETURN server;
 
 ----
