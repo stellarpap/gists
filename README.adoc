@@ -55,6 +55,13 @@ create (:Server{name:'PDBACK-STAGING',ip:'10.227.1.154'});
 create (:Scheduled_task{name:'AutoCancelPNR'});
 create (:Scheduled_task{name:'FlightsToCRM'});
 create (:Application:PaliaMalakia{name:'OldCRM'});
+create (:Scheduled_task{name:'SabrePoolAgent'});
+
+match (a:Scheduled_task {name: 'SabrePoolAgent'}), (b:Server {name: 'PDBACK-STAGING'})
+create (a)-[:DEPLOYED_ON]->(b);
+
+match (a:Scheduled_task {name: 'SabrePoolAgent'}), (b:Database {name: 'SabreSession'})
+create (a)-[:CLEAN]->(b);
 
 match (a:Scheduled_task {name: 'FlightsToCRM'}), (b:Server {name: 'PDBACK-STAGING'})
 create (a)-[:DEPLOYED_ON]->(b);
