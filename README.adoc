@@ -214,6 +214,7 @@ create (a)-[:CALLED_BY]->(b);
 
 
 START n=node(*) 
+where n.name = 'flights'
 return n, labels(n);
 
 
