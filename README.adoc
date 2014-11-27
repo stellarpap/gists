@@ -31,10 +31,10 @@ create (:Service:WEB{name:'Rapida_ws',Endpoint:'www.trip.ru/payment/rapidaservic
 create (:Service:External{name:'Piraeus'});
 create (:Service:External{name:'EFG'});
 create (:DatabaseServer{brand:'Redis'});
-create (:Database{name:'FlightToCrm'});
-create (:Database{name:'FlightsConfirmationEmail'});
-create (:Database{name:'FlightRating'});
-create (:Database{name:'FlightToKumquat'});
+create (:Queue{name:'FlightToCrm'});
+create (:Queue{name:'FlightsConfirmationEmail'});
+create (:Queue{name:'FlightRating'});
+create (:Queue{name:'FlightToKumquat'});
 create (:Application:Web{name:'LeWeb'});
 create (:Application:Web{name:'Panoramix'});
 create (:Application:Mobile{name:'Android'});
@@ -59,6 +59,8 @@ create (:Scheduled_task{name:'SabrePoolAgent'});
 create (:Service:Windows{name:'AutoticketingServiceWorkerService'});
 create (:Database{name:'Autoticketing'});
 
+
+
 match (a:Service {name: 'AutoticketingServiceWorkerService'}), (b:Server {name: 'PDBACK-STAGING'})
 create (a)-[:DEPLOYED_ON]->(b);
 
@@ -71,7 +73,7 @@ create (a)-[:CALLS]->(b);
 match (a:Service {name: 'AutoticketingServiceWorkerService'}), (b:Service {name: 'Sabre'})
 create (a)-[:CALLS]->(b);
 
-match (a:Database {name: 'Autoticketing'}), (b:Database {name: 'FlightToCrm'})
+match (a:Database {name: 'Autoticketing'}), (b:Queue {name: 'FlightToCrm'})
 create (a)-[:STORES_IN]->(b);
 
 match (a:Service {name: 'flights'}), (b:Database {name: 'Autoticketing'})
@@ -92,7 +94,7 @@ create (a)-[:DEPLOYED_ON]->(b);
 match (a:Scheduled_task {name: 'FlightsToCRM'}), (b:Application {name: 'OldCRM'})
 create (a)-[:STORES_IN]->(b);
 
-match (a:Scheduled_task {name: 'FlightsToCRM'}), (b:Database {name: 'FlightToCrm'})
+match (a:Scheduled_task {name: 'FlightsToCRM'}), (b:Queue {name: 'FlightToCrm'})
 create (a)-[:READS_FROM]->(b);
 
 match (a:Scheduled_task {name: 'AutoCancelPNR'}), (b:Server {name: 'PDBACK-STAGING'})
@@ -200,16 +202,16 @@ create (a)-[:HOSTS]->(b);
 match (a:DatabaseServer {brand: 'CouchBase'}), (b:Database {name: 'FlightsStateStorageStaging'})
 create (a)-[:HOSTS]->(b);
 
-match (a:DatabaseServer {brand: 'Redis'}), (b:Database {name: 'FlightToCrm'})
+match (a:DatabaseServer {brand: 'Redis'}), (b:Queue {name: 'FlightToCrm'})
 create (a)-[:HOSTS]->(b);
 
-match (a:DatabaseServer {brand: 'Redis'}), (b:Database {name: 'FlightsConfirmationEmail'})
+match (a:DatabaseServer {brand: 'Redis'}), (b:Queue {name: 'FlightsConfirmationEmail'})
 create (a)-[:HOSTS]->(b);
 
-match (a:DatabaseServer {brand: 'Redis'}), (b:Database {name: 'FlightRating'})
+match (a:DatabaseServer {brand: 'Redis'}), (b:Queue {name: 'FlightRating'})
 create (a)-[:HOSTS]->(b);
 
-match (a:DatabaseServer {brand: 'Redis'}), (b:Database {name: 'FlightToKumquat'})
+match (a:DatabaseServer {brand: 'Redis'}), (b:Queue {name: 'FlightToKumquat'})
 create (a)-[:HOSTS]->(b);
 
 match (a:Service {name: 'flights'}), (b:Database {name: 'Dreamflight'})
@@ -242,16 +244,16 @@ create (a)-[:STORES_IN]->(b);
 match (a:Service {name: 'flights'}), (b:Database {name: 'DFA'})
 create (a)-[:RETRIEVES_FROM]->(b);
 
-match (a:Service {name: 'flights'}), (b:Database {name: 'FlightToCrm'})
+match (a:Service {name: 'flights'}), (b:Queue {name: 'FlightToCrm'})
 create (a)-[:STORES_IN]->(b);
 
-match (a:Service {name: 'flights'}), (b:Database {name: 'FlightsConfirmationEmail'})
+match (a:Service {name: 'flights'}), (b:Queue {name: 'FlightsConfirmationEmail'})
 create (a)-[:STORES_IN]->(b);
 
-match (a:Service {name: 'flights'}), (b:Database {name: 'FlightRating'})
+match (a:Service {name: 'flights'}), (b:Queue {name: 'FlightRating'})
 create (a)-[:STORES_IN]->(b);
 
-match (a:Service {name: 'flights'}), (b:Database {name: 'FlightToKumquat'})
+match (a:Service {name: 'flights'}), (b:Queue {name: 'FlightToKumquat'})
 create (a)-[:STORES_IN]->(b);
 
 
