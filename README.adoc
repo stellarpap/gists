@@ -20,7 +20,7 @@ create (:Database{name:'Payments'});
 create (:Database{name:'FlightsStateStorageStaging'});
 create (:DatabaseServer{brand:'CouchBase'});
 create (:DatabaseServer{brand:'CouchDB'});
-create (:AmazonBucket{name:'DFA'});
+create (:Database:AmazonBucket{name:'DFA'});
 create (:Service:External{name:'Enett'});
 create (:Service:External{name:'Sabre'});
 create (:Service:External{name:'Amadeus'});
@@ -50,7 +50,7 @@ create (:Application:Web{name:'DFA'});
 match (a:Application {name: 'DFA'}), (b:Server {name: 'WEBDIAK-STAGING'})
 create (a)-[:DEPLOYED_ON]->(b);
 
-match (a:Application {name: 'DFA'}), (b:AmazonBucket {name: 'DFA'})
+match (a:Application {name: 'DFA'}), (b:Database {name: 'DFA'})
 create (a)-[:STORES_IN]->(b);
 
 match (a:Service {name: 'flights'}), (b:Service {name: 'Rapida'})
@@ -71,7 +71,7 @@ create (a)-[:CALLS]->(b);
 match (a:Service {name: 'flights_ws'}), (b:Service {name: 'Sabre'})
 create (a)-[:CALLS]->(b);
 
-match (a:Service {name: 'flights_ws'}), (b:AmazonBucket {name: 'DFA'})
+match (a:Service {name: 'flights_ws'}), (b:Database {name: 'DFA'})
 create (a)-[:RETRIEVES_FROM]->(b);
 
 match (a:Service {name: 'flights_ws'}), (b:Database {name: 'Dreamflight'})
@@ -164,7 +164,7 @@ create (a)-[:STORES_IN]->(b);
 match (a:Service {name: 'flights'}), (b:DatabaseServer {brand: 'CouchDB'})
 create (a)-[:STORES_IN]->(b);
 
-match (a:Service {name: 'flights'}), (b:AmazonBucket {name: 'DFA'})
+match (a:Service {name: 'flights'}), (b:Database {name: 'DFA'})
 create (a)-[:RETRIEVES_FROM]->(b);
 
 match (a:Service {name: 'flights'}), (b:Database {name: 'FlightToCrm'})
