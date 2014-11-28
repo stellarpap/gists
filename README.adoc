@@ -367,6 +367,239 @@ match (a:Background_worker{name:'real_margin'}), (b:Service{name:'AWS redrive'})
 create (b)-[:SEND_TO]->(a);
 
 
+// Modules
+// -------
+create (:Module {name: 'KumquatModel'});
+
+// BusinessEntities
+// ----------------
+create (:BusinessEntity {name: 'FlightReservation', attributes: ['back_to_back_payments', 'back_to_back_payments_attributes', 'commission_percentage', 'cost_break_down', 'cost_per_baggage', 'cost_per_baggage_currency', 'cost_per_baggage_currency_id', 'flight_passengers', 'flight_passengers_attributes', 'flight_trips', 'flight_trips_attributes', 'gds_type', 'itinerary_id', 'lead_id', 'maximum_baggage_items', 'number_of_baggages', 'notes_attributes', 'office_id', 'payment_options', 'payment_options_attributes', 'payment_type', 'payment_type_id', 'payment_handler', 'payment_handler_id', 'payment_at', 'pnr', 'price', 'price_currency_id', 'price_currency_code', 'price_local', 'price_local_currency_id', 'price_local_currency_code', 'product_attributes', 'paid_price', 'paid_price_currency_id', 'paid_price_currency_code', 'payment_due_at', 'reserved_at', 'spawned_flights', 'spawned_flights_attributes', 'split_flight_id', 'version']});
+
+create (:BusinessEntity {name: 'FlightTrip', attributes: ['flight_reservation_id', 'position', 'duration_minutes', 'vendor_locator', 'flight_trip_segments', 'flight_trip_segments_attributes', 'version',
+'has_day_change', 'is_red_eye']});
+
+create (:BusinessEntity {name: 'FlightPassenger', attributes: ['flight_reservation_id', 'gender', 'gender_id', 'position', 'passenger_type', 'passenger_type_id', 'first_name', 'last_name', 'birth_date']});
+
+create (:BusinessEntity {name: 'Note', attributes: ['note_owner_id', 'note_owner', 'note_owner_type', 'body']});
+
+create (:BusinessEntity {name: 'Invoice', attributes: ['address', 'binary_a', 'binary_b', 'city', 'country', 'customer_code', 'customer_name', 'document_description', 'document_number', 'document_type', 'email', 'fax_1', 'fax_2', 'file_a', 'file_b', 'filename', 'flight_reservation_id', 'invoicee_id', 'invoice_items_attributes', 'invoicee_type', 'issue_date', 'issue_time', 'language_code', 'notes', 'occupation', 'payment_type', 'pnr', 'tax_registration_office', 'telephone_1', 'telephone_2', 'total_net_value', 'total_value', 'total_value_as_text', 'total_value_foreign_currency', 'total_vat_value', 'vat_number', 'version']});
+
+create (:BusinessEntity {name: 'TradeDocumentDs', attributes: ['document_trade', 'document_trade_id', 'flight_reservation', 'trade_account', 'trade_account_id', 'order_item', 'in_expert', 'ad_code', 'skip_price_check', 'debt_payment_method', 'trade_document_ds_type', 'trade_document_ds_type_id', 'sent_for_invoice', 'bad_xml', 'refunds', 'amount_to_refund', 'amount_to_refund_currency_code', 'secondary_amount', 'refund_date', 'reissues', 'cc_to_carrier', 'refund_code', 'service_fee_amount', 'card_clearance_fee_amount', 'web_discount_amount', 'case_entity_id', 'case_entity', 'task_id', 'task']});
+
+create (:BusinessEntity {name: 'FlightOriginal', attributes: ['flight_reservation_id', 'original']});
+
+create (:BusinessEntity {name: 'PaymentOrder', attributes: ['order', 'order_id', 'payment', 'payment_id', 'order_item', 'order_item_id']});
+
+create (:BusinessEntity {name: 'BackToBackPayment', attributes: ['amount', 'amount_currency_id', 'amount_currency', 'back_to_back_payment_type', 'back_to_back_payment_type_id', 'card_number', 'card_reference', 'flight_reservation', 'flight_reservation_id', 'paid_at']});
+
+create (:BusinessEntity {name: 'PaymentOption', attributes: ['amount', 'amount2', 'flight_reservation', 'flight_reservation_id', 'payment_type', 'payment_type_id', 'name', 'currency_id', 'currency', 'currency2_id', 'currency2', 'payment_reference']});
+
+create (:BusinessEntity {name: 'CommunicationLog', attributes: ['attachments', 'bcc', 'body', 'category', 'category_id', 'case_entity', 'case_entity_id', 'cc', 'exception', 'type', 'type_id', 'from', 'flight_reservation', 'flight_reservation_id', 'person', 'person_id', 'status', 'status_id', 'subject', 'task', 'task_id', 'to']});
+
+create (:BusinessEntity {name: 'TrackingInfo', attributes: ['source', 'medium', 'campaign', 'keyword', 'flight_reservation', 'flight_reservation_id']});
+
+create (:BusinessEntity {name: 'FlightDocument', attributes: ['base_fare', 'base_fare_currency', 'base_fare_currency_id', 'commission_amount', 'commission_percentage', 'derived_exchange_rate', 'derived_exchange_rate_flight_document', 'derived_exchange_rate_flight_document_id', 'euro_base', 'euro_tax', 'employee', 'employee_id', 'equivalent_fare', 'equivalent_fare_currency', 'equivalent_fare_currency_id', 'exchange_rate', 'flight_document_flight_trip_segments_attributes', 'flight_document_source', 'flight_document_source_id', 'flight_passenger_id', 'flight_passenger', 'last_four_digits', 'new_flight_document', 'new_flight_document_id', 'number', 'office_id', 'old_ticket_number', 'payment_type_id', 'payment_type', 'ticketing_carrier_id', 'ticketing_carrier', 'total_price', 'total_price_currency', 'total_price_currency_id', 'total_taxes', 'total_taxes_currency', 'total_taxes_currency_id', 'type', 'type_id']});
+
+create (:BusinessEntity {name: 'FlightRefund', attributes: ['adjustment', 'adjustment_currency', 'adjustment_currency_id', 'authorization_status', 'authorization_comment', 'authorize_refunds_task', 'authorize_refunds_task_id', 'airline_fee', 'airline_fee_currency', 'airline_fee_currency_id', 'bsp_number', 'card_clearance_fee', 'card_clearance_fee_currency', 'card_clearance_fee_currency_id', 'employee', 'employee_id', 'fare', 'fare_currency', 'fare_currency_id', 'flight_document', 'flight_document_id', 'flight_refund_type', 'flight_refund_type_id', 'iata_authorized_at', 'iata_fare', 'iata_fare_currency', 'iata_fare_currency_id', 'iata_tax', 'iata_tax_currency', 'iata_tax_currency_id', 'iata_payment_type', 'iata_payment_type_id', 'office_id', 'payment_type', 'payment_type_id', 'refunded_at', 'receive_refunds_task_id', 'receive_refunds_task', 'service_fee', 'service_fee_currency', 'service_fee_currency_id', 'tax', 'tax_currency', 'tax_currency_id', 'to_be_invoiced_at', 'total', 'total_currency', 'total_currency_id', 'web_discount', 'web_discount_currency', 'web_discount_currency_id', 'euro_fare', 'euro_tax']});
+
+create (:BusinessEntity {name: 'FlightReservationCostBreakDown', attributes: ['flight_reservation', 'flight_reservation_id', 'total_cost', 'total_cost_currency', 'total_cost_currency_id', 'service_fee', 'service_fee_currency', 'service_fee_currency_id', 'credit_card_fee', 'credit_card_fee_currency', 'credit_card_fee_currency_id', 'child_price_without_taxes', 'child_price_without_taxes_currency', 'child_price_without_taxes_currency_id', 'child_taxes_per_person', 'child_taxes_per_person_currency', 'child_taxes_per_person_currency_id', 'child_price_per_person', 'child_price_per_person_currency', 'child_price_per_person_currency_id', 'infant_price_without_taxes', 'infant_price_without_taxes_currency', 'infant_price_without_taxes_currency_id', 'infant_taxes_per_person', 'infant_taxes_per_person_currency', 'infant_taxes_per_person_currency_id', 'infant_price_per_person', 'infant_price_per_person_currency', 'infant_price_per_person_currency_id', 'adult_price_without_taxes', 'adult_price_without_taxes_currency', 'adult_price_without_taxes_currency_id', 'adult_taxes_per_person', 'adult_taxes_per_person_currency', 'adult_taxes_per_person_currency_id', 'adult_price_per_person', 'adult_price_per_person_currency', 'adult_price_per_person_currency_id']});
+
+create (:BusinessEntity {name: 'Product', attributes: ['contact', 'details', 'details_id', 'details_type', 'order', 'order_id']});
+
+create (:BusinessEntity {name: 'Currency', attributes: [ 'code', 'name', 'symbol']});
+
+create (:BusinessEntity {name: 'Lead', attributes: ['name']});
+
+create (:BusinessEntity {name: 'PaymentType', attributes: ['code']});
+
+create (:BusinessEntity {name: 'PaymentHandler', attributes: ['code', 'payment_method_gid', 'description']});
+
+create (:BusinessEntity {name: 'FlightTripSegment'});
+
+create (:BusinessEntity {name: 'Gender'});
+
+create (:BusinessEntity {name: 'InvoiceItem', attributes: ['invoice_id', 'ticket_number', 'name', 'carrier', 'routings', 'departure_date', 'return_date', 'price', 'taxes', 'service_fee', 'total_value', 'full_ticket_number', 'discount_value', 'item_description', 'item_description_2', 'hotel_name', 'hotel_address', 'check_in_date', 'check_out_date', 'number_of_nights', 'number_of_rooms', 'qty', 'vat_value', 'net_value', 'payment_method_fee']});
+
+create (:BusinessEntity {name: 'OrderItem', attributes: ['amount', 'amount2', 'case_entity', 'case_entity_id', 'currency', 'currency_id', 'currency2', 'currency2_id', 'currency_rate', 'order', 'order_id', 'order_item_type', 'order_item_type_id', 'original', 'receive_payment_task', 'receive_payment_task_id']});
+
+create (:BusinessEntity {name: 'TradeDocumentDsType', attributes: ['code']});
+
+create (:BusinessEntity {name: 'DocumentTrade', attributes: ['fad_document_type_gid', 'fad_document_series_gid', 'ad_registration_date', 'f_trade_account_gid', 'f_ad_table_field1_code', 'f_ad_table_field2_code', 'f_ad_table_field3_code', 'f_ad_table_field4_code', 'ad_document_state', 'payment_amount', 'f_payment_method_gid', 'ad_string_field1', 'ad_string_field2', 'ad_printed', 'ad_string_field3', 'ad_string_field4', 'ad_string_field5', 'ad_value_field1', 'ad_value_field2', 'ad_flag1', 'ad_flag2', 'ad_flag3', 'ad_flag4', 'f_item_gid', 'ad_alternative_code', 'fad_table_field5_code', 'ad_approval_code', 'trade_document_ds_id']});
+
+create (:BusinessEntity {name: 'DocumentCash', attributes: ['fad_document_type_gid', 'fad_document_series_gid', 'f_ad_table_field4_code', 'ad_registration_date', 'f_trade_account_gid', 'f_trade_account_site_gid', 'payable_amount', 'total_value', 'ad_document_state', 'trade_account_type', 'trade_account_nature', 'ad_reasoning', 'ad_string_field1', 'ad_string_field4', 'ad_approval_code', 'ad_value_field2']});
+
+create (:BusinessEntity {name: 'TradeAccount', attributes: ['activity_description', 'address1', 'address2', 'alternative_code', 'area', 'code', 'email_address', 'f_city_code', 'f_postal_code', 'fax_number1', 'fax_number2', 'flight_reservation', 'kepyo_status', 'name', 'nature', 'sites_code', 'sites_description', 'string_field1', 'string_field2', 'tax_registration_number', 'telephone1', 'telephone2', 'trade_account_type']});
+
+create (:BusinessEntity {name: 'LineLiquidityAccount', attributes: ['line_type', 'f_liquidity_account_gid', 'liquidity_value', 'line_kind']});
+
+create (:BusinessEntity {name: 'LineItem', attributes: ['f_item_gid', 'line_type', 'quantity', 'price', 'discount1', 'discount1_value', 'currency_total_value', 'udf_value1', 'udf_value2', 'udf_value4', 'udf_value5', 'udf_date1', 'udf_date2', 'string_field1', 'string_field2', 'string_field3', 'string_field4', 'string_field5', 'cost_value', 'commission_value', 'comment', 'alternative_comment', 'trade_document_ds_id', 'flight_document_id', 'flight_document', 'flight_refund_id', 'flight_refund']});
+
+// Relationships
+// --------------
+match (n:BusinessEntity {name: 'FlightReservation'}),
+      (n2:BusinessEntity {name: 'FlightTrip'})
+create (n)-[:HAS_MANY {name: 'flight_trips'}]->(n2);
+
+match (n:BusinessEntity {name: 'FlightReservation'}),
+      (n2:BusinessEntity {name: 'FlightPassenger'})
+create (n)-[:HAS_MANY {name: 'flight_passengers'}]->(n2);
+
+match (n:BusinessEntity {name: 'FlightReservation'}),
+      (n2:BusinessEntity {name: 'Note'})
+create (n)-[:HAS_MANY {name: 'notes'}]->(n2);
+
+match (n:BusinessEntity {name: 'FlightReservation'}),
+      (n2:BusinessEntity {name: 'Invoice'})
+create (n)-[:HAS_MANY {name: 'invoices'}]->(n2);
+
+match (n:BusinessEntity {name: 'FlightReservation'}),
+      (n2:BusinessEntity {name: 'TradeDocumentDs'})
+create (n)-[:HAS_MANY {name: 'trade_document_dses'}]->(n2);
+
+match (n:BusinessEntity {name: 'FlightReservation'}),
+      (n2:BusinessEntity {name: 'FlightOriginal'})
+create (n)-[:HAS_MANY {name: 'flight_originals'}]->(n2);
+
+match (n:BusinessEntity {name: 'FlightReservation'}),
+      (n2:BusinessEntity {name: 'PaymentOrder'})
+create (n)-[:HAS_MANY {name: 'payment_orders'}]->(n2);
+
+match (n:BusinessEntity {name: 'FlightReservation'}),
+      (n2:BusinessEntity {name: 'BackToBackPayment'})
+create (n)-[:HAS_MANY {name: 'back_to_back_payments'}]->(n2);
+
+match (n:BusinessEntity {name: 'FlightReservation'}),
+      (n2:BusinessEntity {name: 'PaymentOption'})
+create (n)-[:HAS_MANY {name: 'payment_options'}]->(n2);
+
+match (n:BusinessEntity {name: 'FlightReservation'}),
+      (n2:BusinessEntity {name: 'CommunicationLog'})
+create (n)-[:HAS_MANY {name: 'communication_logs'}]->(n2);
+
+match (n:BusinessEntity {name: 'FlightReservation'}),
+      (n2:BusinessEntity {name: 'TrackingInfo'})
+create (n)-[:HAS_MANY {name: 'tracking_infos'}]->(n2);
+
+match (n:BusinessEntity {name: 'FlightReservation'}),
+      (n2:BusinessEntity {name: 'FlightDocument'})
+create (n)-[:HAS_MANY {name: 'flight_documents'}]->(n2);
+
+match (n:BusinessEntity {name: 'FlightReservation'}),
+      (n2:BusinessEntity {name: 'FlightRefund'})
+create (n)-[:HAS_MANY {name: 'flight_refunds'}]->(n2);
+
+match (n:BusinessEntity {name: 'FlightReservation'}),
+      (n2:BusinessEntity {name: 'FlightReservationCostBreakDown'})
+create (n)-[:HAS_ONE {name: 'cost_break_down'}]->(n2);
+
+match (n:BusinessEntity {name: 'FlightReservation'}),
+      (n2:BusinessEntity {name: 'Product'})
+create (n)-[:HAS_ONE {name: 'product'}]->(n2);
+
+match (n:BusinessEntity {name: 'FlightReservation'}),
+      (n2:BusinessEntity {name: 'Currency'})
+create (n)-[:BELONGS_TO {name: 'price_currency'}]->(n2);
+
+match (n:BusinessEntity {name: 'FlightReservation'}),
+      (n2:BusinessEntity {name: 'Currency'})
+create (n)-[:BELONGS_TO {name: 'price_local_currency'}]->(n2);
+
+match (n:BusinessEntity {name: 'FlightReservation'}),
+      (n2:BusinessEntity {name: 'Currency'})
+create (n)-[:BELONGS_TO {name: 'paid_price_currency'}]->(n2);
+
+match (n:BusinessEntity {name: 'FlightReservation'}),
+      (n2:BusinessEntity {name: 'Lead'})
+create (n)-[:BELONGS_TO {name: 'lead'}]->(n2);
+
+match (n:BusinessEntity {name: 'FlightReservation'}),
+      (n2:BusinessEntity {name: 'PaymentType'})
+create (n)-[:BELONGS_TO {name: 'payment_type'}]->(n2);
+
+match (n:BusinessEntity {name: 'FlightReservation'}),
+      (n2:BusinessEntity {name: 'PaymentHandler'})
+create (n)-[:BELONGS_TO {name: 'payment_handler'}]->(n2);
+
+match (n:BusinessEntity {name: 'FlightReservation'}),
+      (n2:BusinessEntity {name: 'Currency'})
+create (n)-[:BELONGS_TO {name: 'cost_per_baggage_currency'}]->(n2);
+
+// Flight Trip associations
+match (n:BusinessEntity {name: 'FlightTrip'}),
+      (n2:BusinessEntity {name: 'FlightTripSegment'})
+create (n)-[:HAS_MANY {name: 'flight_trip_segments'}]->(n2);
+
+// Flight Passenger
+match (n:BusinessEntity {name: 'FlightPassenger'}),
+      (n2:BusinessEntity {name: 'Gender'})
+create (n)-[:BELONGS_TO {name: 'gender'}]->(n2);
+
+match (n:BusinessEntity {name: 'FlightPassenger'}),
+      (n2:BusinessEntity {name: 'FlightDocument'})
+create (n)-[:HAS_MANY {name: 'flight_documents'}]->(n2);
+
+// Invoice
+match (n:BusinessEntity {name: 'Invoice'}),
+      (n2:BusinessEntity {name: 'InvoiceItem'})
+create (n)-[:HAS_MANY {name: 'invoice_items'}]->(n2);      
+
+// TradeDocumentDs
+match (n:BusinessEntity {name: 'TradeDocumentDs'}),
+      (n2:BusinessEntity {name: 'OrderItem'})
+create (n)-[:BELONGS_TO {name: 'order_item'}]->(n2);
+
+match (n:BusinessEntity {name: 'TradeDocumentDs'}),
+      (n2:BusinessEntity {name: 'TradeDocumentDsType'})
+create (n)-[:BELONGS_TO {name: 'trade_document_ds_type'}]->(n2);
+
+match (n:BusinessEntity {name: 'TradeDocumentDs'}),
+      (n2:BusinessEntity {name: 'DocumentTrade'})
+create (n)-[:HAS_ONE {name: 'document_trade'}]->(n2);
+
+match (n:BusinessEntity {name: 'TradeDocumentDs'}),
+      (n2:BusinessEntity {name: 'DocumentCash'})
+create (n)-[:HAS_ONE {name: 'document_cash'}]->(n2);
+
+match (n:BusinessEntity {name: 'TradeDocumentDs'}),
+      (n2:BusinessEntity {name: 'TradeAccount'})
+create (n)-[:HAS_ONE {name: 'trade_account'}]->(n2);
+
+match (n:BusinessEntity {name: 'TradeDocumentDs'}),
+      (n2:BusinessEntity {name: 'LineLiquidityAccount'})
+create (n)-[:HAS_ONE {name: 'line_liquidity_account'}]->(n2);
+
+match (n:BusinessEntity {name: 'TradeDocumentDs'}),
+      (n2:BusinessEntity {name: 'LineItem'})
+create (n)-[:HAS_MANY {name: 'line_items'}]->(n2);
+
+// Order Item
+match (n:BusinessEntity {name: 'OrderItem'}),
+      (n2:BusinessEntity {name: 'Currency'})
+create (n)-[:BELONGS_TO {name: 'currency'}]->(n2);
+
+match (n:BusinessEntity {name: 'OrderItem'}),
+      (n2:BusinessEntity {name: 'Currency'})
+create (n)-[:BELONGS_TO {name: 'currency2'}]->(n2);
+
+match (n:BusinessEntity {name: 'OrderItem'}),
+      (n2:BusinessEntity {name: 'PaymentOrder'})
+create (n)-[:HAS_MANY {name: 'payment_orders'}]->(n2);
+
+// LineItem
+match (n:BusinessEntity {name: 'LineItem'}),
+      (n2:BusinessEntity {name: 'FlightDocument'})
+create (n)-[:BELONGS_TO {name: 'flight_document'}]->(n2);
+
+match (n:BusinessEntity {name: 'LineItem'}),
+      (n2:BusinessEntity {name: 'FlightRefund'})
+create (n)-[:BELONGS_TO {name: 'flight_refund'}]->(n2);
+
+// KumquatModel
+match (n:Module {name: 'KumquatModel'}), 
+      (n2:BusinessEntity {name: 'FlightReservation'})
+create (n)-[:OWNS]->(n2);
+
+
 ----
 
 //table
