@@ -8,339 +8,347 @@ This repo contains content for use at http://gist.neo4j.org/.
 ----
 //Flights Service v2
 create (:Service:Rest{Endpoint:'http://flights-v2.staging.api.e-travel.gr',name:'flights'});
-create (:Server{name:'SDIAK-STAGING',ip:'10.227.1.47'});
-create (:DatabaseServer{brand:'MSSQL'});
-create (:Database{name:'Dreamflight'});
-create (:Database{name:'Affiliates'});
-create (:Database{name:'CommonInformation'});
-create (:Database{name:'TravelInsurancesDB'});
-create (:Database{name:'Rapida'});
-create (:Database{name:'SabreSession'});
-create (:Database{name:'Payments'});
-create (:Database{name:'FlightsStateStorageStaging'});
-create (:DatabaseServer{brand:'CouchBase'});
-create (:DatabaseServer{brand:'CouchDB'});
-create (:Database:AmazonBucket{name:'DFA'});
-create (:Service:External{name:'Enett'});
-create (:Service:External{name:'Sabre'});
-create (:Service:External{name:'Amadeus'});
-create (:Service:External{name:'TravelFusion'});
-create (:Service:External{name:'Fraudpointer'});
-create (:Service:External{name:'Perseuss'});
-create (:Service:WEB{name:'Rapida_ws',Endpoint:'www.trip.ru/payment/rapidaservice.svc/payment_app'});
-create (:Service:External{name:'Piraeus'});
-create (:Service:External{name:'EFG'});
-create (:DatabaseServer{brand:'Redis'});
-create (:Queue{name:'FlightToCrm'});
-create (:Queue{name:'FlightsConfirmationEmail'});
-create (:Queue{name:'FlightRating'});
-create (:Queue{name:'FlightToKumquat'});
-create (:Application:Web{name:'LeWeb'});
-create (:Application:Web{name:'Panoramix'});
-create (:Application:Mobile{name:'Android'});
-create (:Application:Mobile{name:'iOS'});
-create (:Service:Rest{Endpoint:'mybookings-v1.staging.api.e-travel.gr',name:'My_bookings'});
-create (:Service:WEB{Endpoint:'flightsws-v1.staging.api.e-travel.gr',name:'flights_ws'});
-create (:Server{name:'AWSDIAK-STAGING',ip:'10.227.1.62'});
-create (:Application:External{name:'MetaSearchers'});
-create (:Service:Rest{Endpoint:'affiliates-v1.staging.api.e-travel.gr',name:'Affiliates'});
-create (:Service:Rest{Endpoint:'rapidaservice-v1.staging.api.e-travel.gr',name:'Rapida'});
-create (:Application:Web{name:'DFA'});
-create (:Server{name:'WEBDIAK-STAGING',ip:'10.227.1.89'});
-create (:Application:Web{name:'MyBookings'});
-create (:Application:Web{name:'Affiliates'});
-create (:Scheduled_task{name:'Affiliates_Sales_Updater'});
-create (:SNS{name:'Sales'});
-create (:Server{name:'PDBACK-STAGING',ip:'10.227.1.154'});
-create (:Scheduled_task{name:'AutoCancelPNR'});
-create (:Scheduled_task{name:'FlightsToCRM'});
-create (:Application:PaliaMalakia{name:'OldCRM'});
-create (:Scheduled_task{name:'SabrePoolAgent'});
-create (:Service:Windows{name:'AutoticketingServiceWorkerService'});
-create (:Queue{name:'Autoticketing'});
+create (:Server{name:sdiak_staging,ip:'10.227.1.47'});
+create (:DatabaseServer{brand:'mssql'});
+create (:Database{name:'dreamflight'});
+create (:Database{name:'affiliates'});
+create (:Database{name:'common_information'});
+create (:Database{name:'travel_insurances_db'});
+create (:Database{name:'rapida'});
+create (:Database{name:'sabre_session'});
+create (:Database{name:'payments'});
+create (:Database{name:'flights_state_storage_staging'});
+create (:DatabaseServer{brand:'couch_base'});
+create (:DatabaseServer{brand:'couch_db'});
+create (:Database:AmazonBucket{name:'dfa'});
+create (:Service:External{name:'enett'});
+create (:Service:External{name:'sabre'});
+create (:Service:External{name:'amadeus'});
+create (:Service:External{name:'travelfusion'});
+create (:Service:External{name:'fraudpointer'});
+create (:Service:External{name:'perseuss'});
+create (:Service:Web{name:'rapida_ws',Endpoint:'www.trip.ru/payment/rapidaservice.svc/payment_app'});
+create (:Service:External{name:'piraeus'});
+create (:Service:External{name:'efg'});
+create (:DatabaseServer{brand:'redis'});
+create (:Queue{name:'flight_to_crm'});
+create (:Queue{name:'flights_confirmation_email'});
+create (:Queue{name:'flight_rating'});
+create (:Queue{name:'flight_to_kumquat'});
+create (:Application:Web{name:'leweb'});
+create (:Application:Web{name:'panoramix'});
+create (:Application:Mobile{name:'android'});
+create (:Application:Mobile{name:'ios'});
+create (:Service:Rest{Endpoint:'mybookings-v1.staging.api.e-travel.gr',name:'my_bookings'});
+create (:Service:Web{Endpoint:'flightsws-v1.staging.api.e-travel.gr',name:'flights_ws'});
+create (:Server{name:'awsdiak_staging',ip:'10.227.1.62'});
+create (:Application:External{name:'metasearchers'});
+create (:Service:Rest{Endpoint:'affiliates-v1.staging.api.e-travel.gr',name:'affiliates'});
+create (:Service:Rest{Endpoint:'rapidaservice-v1.staging.api.e-travel.gr',name:'rapida'});
+create (:Application:Web{name:'dfa'});
+create (:Server{name:'webdiak_staging',ip:'10.227.1.89'});
+create (:Application:Web{name:'my_bookings'});
+create (:Application:Web{name:'affiliates'});
+create (:ScheduledTask{name:'affiliates_sales_updater'});
+create (:Sns{name:'sales'});
+create (:Server{name:'pdback_staging',ip:'10.227.1.154'});
+create (:ScheduledTask{name:'auto_cancel_pnr'});
+create (:ScheduledTask{name:'flights_to_crm'});
+create (:Application:PaliaMalakia{name:'old_crm'});
+create (:ScheduledTask{name:'sabre_pool_agent'});
+create (:Service:Windows{name:'autoticketing_service_worker'});
+create (:Queue{name:'autoticketing'});
 
 
 
-match (a:Service {name: 'AutoticketingServiceWorkerService'}), (b:Server {name: 'PDBACK-STAGING'})
+match (a:Service {name: 'autoticketing_service_worker'}), (b:Server {name: 'pdback_staging'})
 create (a)-[:DEPLOYED_ON]->(b);
 
-match (a:Service {name: 'AutoticketingServiceWorkerService'}), (b:Queue {name: 'Autoticketing'})
+match (a:Service {name: 'autoticketing_service_worker'}), (b:Queue {name: 'autoticketing'})
 create (a)-[:READS_FROM]->(b);
 
-match (a:Service {name: 'AutoticketingServiceWorkerService'}), (b:Service {name: 'Amadeus'})
+match (a:Service {name: 'autoticketing_service_worker'}), (b:Service {name: 'amadeus'})
 create (a)-[:CALLS]->(b);
 
-match (a:Service {name: 'AutoticketingServiceWorkerService'}), (b:Service {name: 'Sabre'})
+match (a:Service {name: 'autoticketing_service_worker'}), (b:Service {name: 'sabre'})
 create (a)-[:CALLS]->(b);
 
-match (a:Queue {name: 'Autoticketing'}), (b:Queue {name: 'FlightToCrm'})
+match (a:Queue {name: 'autoticketing'}), (b:Queue {name: 'flight_to_crm'})
 create (a)-[:STORES_IN]->(b);
 
-match (a:Service {name: 'flights'}), (b:Queue {name: 'Autoticketing'})
+match (a:Service {name: 'flights'}), (b:Queue {name: 'autoticketing'})
 create (a)-[:STORES_IN]->(b);
 
-match (a:DatabaseServer {brand: 'Redis'}), (b:Queue {name: 'Autoticketing'})
+match (a:DatabaseServer {brand: 'redis'}), (b:Queue {name: 'autoticketing'})
 create (a)-[:HOSTS]->(b);
 
-match (a:Scheduled_task {name: 'SabrePoolAgent'}), (b:Server {name: 'PDBACK-STAGING'})
+match (a:ScheduledTask {name: 'sabre_pool_agent'}), (b:Server {name: 'pdback_staging'})
 create (a)-[:DEPLOYED_ON]->(b);
 
-match (a:Scheduled_task {name: 'SabrePoolAgent'}), (b:Database {name: 'SabreSession'})
+match (a:ScheduledTask {name: 'sabre_pool_agent'}), (b:Database {name: 'sabre_session'})
 create (a)-[:CLEAN]->(b);
 
-match (a:Scheduled_task {name: 'FlightsToCRM'}), (b:Server {name: 'PDBACK-STAGING'})
+match (a:ScheduledTask {name: 'flights_to_crm'}), (b:Server {name: 'pdback_staging'})
 create (a)-[:DEPLOYED_ON]->(b);
 
-match (a:Scheduled_task {name: 'FlightsToCRM'}), (b:Application {name: 'OldCRM'})
+match (a:ScheduledTask {name: 'flights_to_crm'}), (b:Application {name: 'old_crm'})
 create (a)-[:STORES_IN]->(b);
 
-match (a:Scheduled_task {name: 'FlightsToCRM'}), (b:Queue {name: 'FlightToCrm'})
+match (a:ScheduledTask {name: 'flights_to_crm'}), (b:Queue {name: 'flight_to_crm'})
 create (a)-[:READS_FROM]->(b);
 
-match (a:Scheduled_task {name: 'AutoCancelPNR'}), (b:Server {name: 'PDBACK-STAGING'})
+match (a:ScheduledTask {name: 'auto_cancel_pnr'}), (b:Server {name: 'pdback_staging'})
 create (a)-[:DEPLOYED_ON]->(b);
 
-match (a:Scheduled_task {name: 'AutoCancelPNR'}), (b:Service {name: 'Sabre'})
+match (a:ScheduledTask {name: 'auto_cancel_pnr'}), (b:Service {name: 'sabre'})
 create (a)-[:CALLS]->(b);
 
-match (a:Scheduled_task {name: 'AutoCancelPNR'}), (b:Database {name: 'Dreamflight'})
+match (a:ScheduledTask {name: 'auto_cancel_pnr'}), (b:Database {name: 'dreamflight'})
 create (a)-[:READS_FROM]->(b);
 
-match (a:Scheduled_task {name: 'Affiliates_Sales_Updater'}), (b:Server {name: 'PDBACK-STAGING'})
+match (a:ScheduledTask {name: 'affiliates_sales_updater'}), (b:Server {name: 'pdback_staging'})
 create (a)-[:DEPLOYED_ON]->(b);
 
-match (a:Scheduled_task {name: 'Affiliates_Sales_Updater'}), (b:SNS {name: 'Sales'})
+match (a:ScheduledTask {name: 'affiliates_sales_updater'}), (b:Sns {name: 'sales'})
 create (a)-[:READS_FROM]->(b);
 
-match (a:Scheduled_task {name: 'Affiliates_Sales_Updater'}), (b:Database {name: 'Affiliates'})
+match (a:ScheduledTask {name: 'affiliates_sales_updater'}), (b:Database {name: 'affiliates'})
 create (a)-[:STORES_IN]->(b);
 
-match (a:Application {name: 'Affiliates'}), (b:Server {name: 'WEBDIAK-STAGING'})
+match (a:Application {name: 'affiliates'}), (b:Server {name: 'webdiak_staging'})
 create (a)-[:DEPLOYED_ON]->(b);
 
-match (a:Application {name: 'Affiliates'}), (b:Database {name: 'Affiliates'})
+match (a:Application {name: 'affiliates'}), (b:Database {name: 'affiliates'})
 create (a)-[:STORES_IN]->(b);
 
-match (a:Application {name: 'MyBookings'}), (b:Server {name: 'WEBDIAK-STAGING'})
+match (a:Application {name: 'my_bookings'}), (b:Server {name: 'webdiak_staging'})
 create (a)-[:DEPLOYED_ON]->(b);
 
-match (a:Application {name: 'DFA'}), (b:Server {name: 'WEBDIAK-STAGING'})
+match (a:Application {name: 'dfa'}), (b:Server {name: 'webdiak_staging'})
 create (a)-[:DEPLOYED_ON]->(b);
 
-match (a:Application {name: 'DFA'}), (b:Database {name: 'DFA'})
+match (a:Application {name: 'dfa'}), (b:Database {name: 'dfa'})
 create (a)-[:STORES_IN]->(b);
 
-match (a:Service {name: 'flights'}), (b:Service {name: 'Rapida'})
+match (a:Service {name: 'flights'}), (b:Service {name: 'rapida'})
 create (a)-[:CALLS]->(b);
 
-match (a:Service {name: 'Rapida'}), (b:Server {name: 'SDIAK-STAGING'})
+match (a:Service {name: 'rapida'}), (b:Server {name: sdiak_staging})
 create (a)-[:DEPLOYED_ON]->(b);
 
-match (a:Service {name: 'Affiliates'}), (b:Database {name: 'Affiliates'})
+match (a:Service {name: 'affiliates'}), (b:Database {name: 'affiliates'})
 create (a)-[:STORES_IN]->(b);
 
-match (a:Application {name: 'MetaSearchers'}) , (b:Service {name: 'flights_ws'})
+match (a:Application {name: 'metasearchers'}) , (b:Service {name: 'flights_ws'})
 create (a)-[:CALLED_BY]->(b);
 
 match (a:Service {name: 'flights_ws'}), (b:Service {name: 'Anadeus'})
 create (a)-[:CALLS]->(b);
 
-match (a:Service {name: 'flights_ws'}), (b:Service {name: 'Sabre'})
+match (a:Service {name: 'flights_ws'}), (b:Service {name: 'sabre'})
 create (a)-[:CALLS]->(b);
 
-match (a:Service {name: 'flights_ws'}), (b:Database {name: 'DFA'})
+match (a:Service {name: 'flights_ws'}), (b:Database {name: 'dfa'})
 create (a)-[:RETRIEVES_FROM]->(b);
 
-match (a:Service {name: 'flights_ws'}), (b:Database {name: 'Dreamflight'})
+match (a:Service {name: 'flights_ws'}), (b:Database {name: 'dreamflight'})
 create (a)-[:STORES_IN]->(b);
 
-match (a:Service {name: 'flights_ws'}), (b:Database {name: 'FlightsStateStorageStaging'})
+match (a:Service {name: 'flights_ws'}), (b:Database {name: 'flights_state_storage_staging'})
 create (a)-[:STORES_IN]->(b);
 
-match (a:Service {name: 'flights_ws'}), (b:Database {name: 'CommonInformation'})
+match (a:Service {name: 'flights_ws'}), (b:Database {name: 'common_information'})
 create (a)-[:STORES_IN]->(b);
 
-match (a:Service {name: 'flights_ws'}), (b:Database {name: 'SabreSession'})
+match (a:Service {name: 'flights_ws'}), (b:Database {name: 'sabre_session'})
 create (a)-[:STORES_IN]->(b);
 
-match (a:Service {name: 'flights_ws'}), (b:Database {name: 'Affiliates'})
+match (a:Service {name: 'flights_ws'}), (b:Database {name: 'affiliates'})
 create (a)-[:STORES_IN]->(b);
 
-match (a:Service {name: 'flights_ws'}), (b:Server {name: 'AWSDIAK-STAGING'})
+match (a:Service {name: 'flights_ws'}), (b:Server {name: 'awsdiak_staging'})
 create (a)-[:DEPLOYED_ON]->(b);
 
-match (a:Service {name: 'flights'}), (b:Server {name: 'SDIAK-STAGING'})
+match (a:Service {name: 'flights'}), (b:Server {name: sdiak_staging})
 create (a)-[:DEPLOYED_ON]->(b);
 
-match (a:Service {name: 'Affiliates'}), (b:Server {name: 'SDIAK-STAGING'})
+match (a:Service {name: 'affiliates'}), (b:Server {name: sdiak_staging})
 create (a)-[:DEPLOYED_ON]->(b);
 
-match (a:Service {name: 'My_bookings'}), (b:Server {name: 'SDIAK-STAGING'})
+match (a:Service {name: 'my_bookings'}), (b:Server {name: sdiak_staging})
 create (a)-[:DEPLOYED_ON]->(b);
 
-match (a:DatabaseServer {brand: 'MSSQL'}), (b:Database {name: 'Dreamflight'})
+match (a:DatabaseServer {brand: 'mssql'}), (b:Database {name: 'dreamflight'})
 create (a)-[:HOSTS]->(b);
 
-match (a:DatabaseServer {brand: 'MSSQL'}), (b:Database {name: 'Affiliates'})
+match (a:DatabaseServer {brand: 'mssql'}), (b:Database {name: 'affiliates'})
 create (a)-[:HOSTS]->(b);
 
-match (a:DatabaseServer {brand: 'MSSQL'}), (b:Database {name: 'CommonInformation'})
+match (a:DatabaseServer {brand: 'mssql'}), (b:Database {name: 'common_information'})
 create (a)-[:HOSTS]->(b);
 
-match (a:DatabaseServer {brand: 'MSSQL'}), (b:Database {name: 'TravelInsurancesDB'})
+match (a:DatabaseServer {brand: 'mssql'}), (b:Database {name: 'travel_insurances_db'})
 create (a)-[:HOSTS]->(b);
 
-match (a:DatabaseServer {brand: 'MSSQL'}), (b:Database {name: 'Rapida'})
+match (a:DatabaseServer {brand: 'mssql'}), (b:Database {name: 'rapida'})
 create (a)-[:HOSTS]->(b);
 
-match (a:DatabaseServer {brand: 'MSSQL'}), (b:Database {name: 'SabreSession'})
+match (a:DatabaseServer {brand: 'mssql'}), (b:Database {name: 'sabre_session'})
 create (a)-[:HOSTS]->(b);
 
-match (a:DatabaseServer {brand: 'MSSQL'}), (b:Database {name: 'Payments'})
+match (a:DatabaseServer {brand: 'mssql'}), (b:Database {name: 'payments'})
 create (a)-[:HOSTS]->(b);
 
-match (a:DatabaseServer {brand: 'CouchBase'}), (b:Database {name: 'FlightsStateStorageStaging'})
+match (a:DatabaseServer {brand: 'couch_base'}), (b:Database {name: 'flights_state_storage_staging'})
 create (a)-[:HOSTS]->(b);
 
-match (a:DatabaseServer {brand: 'Redis'}), (b:Queue {name: 'FlightToCrm'})
+match (a:DatabaseServer {brand: 'redis'}), (b:Queue {name: 'flight_to_crm'})
 create (a)-[:HOSTS]->(b);
 
-match (a:DatabaseServer {brand: 'Redis'}), (b:Queue {name: 'FlightsConfirmationEmail'})
+match (a:DatabaseServer {brand: 'redis'}), (b:Queue {name: 'flights_confirmation_email'})
 create (a)-[:HOSTS]->(b);
 
-match (a:DatabaseServer {brand: 'Redis'}), (b:Queue {name: 'FlightRating'})
+match (a:DatabaseServer {brand: 'redis'}), (b:Queue {name: 'flight_rating'})
 create (a)-[:HOSTS]->(b);
 
-match (a:DatabaseServer {brand: 'Redis'}), (b:Queue {name: 'FlightToKumquat'})
+match (a:DatabaseServer {brand: 'redis'}), (b:Queue {name: 'flight_to_kumquat'})
 create (a)-[:HOSTS]->(b);
 
-match (a:Service {name: 'flights'}), (b:Database {name: 'Dreamflight'})
+match (a:Service {name: 'flights'}), (b:Database {name: 'dreamflight'})
 create (a)-[:STORES_IN]->(b);
 
-match (a:Service {name: 'flights'}), (b:Database {name: 'Affiliates'})
+match (a:Service {name: 'flights'}), (b:Database {name: 'affiliates'})
 create (a)-[:STORES_IN]->(b);
 
-match (a:Service {name: 'flights'}), (b:Database {name: 'CommonInformation'})
+match (a:Service {name: 'flights'}), (b:Database {name: 'common_information'})
 create (a)-[:STORES_IN]->(b);
 
-match (a:Service {name: 'flights'}), (b:Database {name: 'TravelInsurancesDB'})
+match (a:Service {name: 'flights'}), (b:Database {name: 'travel_insurances_db'})
 create (a)-[:STORES_IN]->(b);
 
-match (a:Service {name: 'flights'}), (b:Database {name: 'Rapida'})
+match (a:Service {name: 'flights'}), (b:Database {name: 'rapida'})
 create (a)-[:STORES_IN]->(b);
 
-match (a:Service {name: 'flights'}), (b:Database {name: 'SabreSession'})
+match (a:Service {name: 'flights'}), (b:Database {name: 'sabre_session'})
 create (a)-[:STORES_IN]->(b);
 
-match (a:Service {name: 'flights'}), (b:Database {name: 'Payments'})
+match (a:Service {name: 'flights'}), (b:Database {name: 'payments'})
 create (a)-[:STORES_IN]->(b);
 
-match (a:Service {name: 'flights'}), (b:Database {name: 'FlightsStateStorageStaging'})
+match (a:Service {name: 'flights'}), (b:Database {name: 'flights_state_storage_staging'})
 create (a)-[:STORES_IN]->(b);
 
-match (a:Service {name: 'flights'}), (b:DatabaseServer {brand: 'CouchDB'})
+match (a:Service {name: 'flights'}), (b:DatabaseServer {brand: 'couch_db'})
 create (a)-[:STORES_IN]->(b);
 
-match (a:Service {name: 'flights'}), (b:Database {name: 'DFA'})
+match (a:Service {name: 'flights'}), (b:Database {name: 'dfa'})
 create (a)-[:RETRIEVES_FROM]->(b);
 
-match (a:Service {name: 'flights'}), (b:Queue {name: 'FlightToCrm'})
+match (a:Service {name: 'flights'}), (b:Queue {name: 'flight_to_crm'})
 create (a)-[:STORES_IN]->(b);
 
-match (a:Service {name: 'flights'}), (b:Queue {name: 'FlightsConfirmationEmail'})
+match (a:Service {name: 'flights'}), (b:Queue {name: 'flights_confirmation_email'})
 create (a)-[:STORES_IN]->(b);
 
-match (a:Service {name: 'flights'}), (b:Queue {name: 'FlightRating'})
+match (a:Service {name: 'flights'}), (b:Queue {name: 'flight_rating'})
 create (a)-[:STORES_IN]->(b);
 
-match (a:Service {name: 'flights'}), (b:Queue {name: 'FlightToKumquat'})
+match (a:Service {name: 'flights'}), (b:Queue {name: 'flight_to_kumquat'})
 create (a)-[:STORES_IN]->(b);
 
 
-match (a:Service {name: 'flights'}), (b:Service {name: 'Enett'})
+match (a:Service {name: 'flights'}), (b:Service {name: 'enett'})
 create (a)-[:CALLS]->(b);
 
-match (a:Service {name: 'flights'}), (b:Service {name: 'Sabre'})
+match (a:Service {name: 'flights'}), (b:Service {name: 'sabre'})
 create (a)-[:CALLS]->(b);
 
-match (a:Service {name: 'flights'}), (b:Service {name: 'Amadeus'})
+match (a:Service {name: 'flights'}), (b:Service {name: 'amadeus'})
 create (a)-[:CALLS]->(b);
 
-match (a:Service {name: 'flights'}), (b:Service {name: 'TravelFusion'})
+match (a:Service {name: 'flights'}), (b:Service {name: 'travelfusion'})
 create (a)-[:CALLS]->(b);
 
-match (a:Service {name: 'flights'}), (b:Service {name: 'Fraudpointer'})
+match (a:Service {name: 'flights'}), (b:Service {name: 'fraudpointer'})
 create (a)-[:CALLS]->(b);
 
-match (a:Service {name: 'flights'}), (b:Service {name: 'Perseuss'})
+match (a:Service {name: 'flights'}), (b:Service {name: 'perseuss'})
 create (a)-[:CALLS]->(b);
 
-match (a:Service {name: 'flights'}), (b:Service {name: 'EFG'})
+match (a:Service {name: 'flights'}), (b:Service {name: 'efg'})
 create (a)-[:CALLS]->(b);
 
-match (a:Service {name: 'flights'}), (b:Service {name: 'Rapida_ws'})
+match (a:Service {name: 'flights'}), (b:Service {name: 'rapida_ws'})
 create (a)-[:CALLS]->(b);
 
-match (a:Service {name: 'flights'}), (b:Service {name: 'Piraeus'})
+match (a:Service {name: 'flights'}), (b:Service {name: 'piraeus'})
 create (a)-[:CALLS]->(b);
 
-match (a:Application {name: 'LeWeb'}) , (b:Service {name: 'flights'})
+match (a:Application {name: 'leweb'}) , (b:Service {name: 'flights'})
 create (a)-[:CALLS]->(b);
 
-match (a:Application {name: 'Panoramix'}) , (b:Service {name: 'flights'})
+match (a:Application {name: 'panoramix'}) , (b:Service {name: 'flights'})
 create (a)-[:CALLS]->(b);
 
-match (a:Application {name: 'My_bookings'}) , (b:Service {name: 'flights'})
+match (a:Application {name: 'my_bookings'}) , (b:Service {name: 'flights'})
 create (a)-[:CALLS]->(b);
 
-match (a:Application {name: 'Android'}) , (b:Service {name: 'flights'})
+match (a:Application {name: 'android'}) , (b:Service {name: 'flights'})
 create (a)-[:CALLS]->(b);
 
-match (a:Application {name: 'iOS'}) , (b:Service {name: 'flights'})
+match (a:Application {name: 'ios'}) , (b:Service {name: 'flights'})
 create (a)-[:CALLS]->(b);
 
 
 
 
-create (:Service{endpoint:'content-v1.staging.api.e-travel.gr', name: 'Content service'});
-create (:Background_worker{name:'Hotels x-sell_emailer'});
+create (:Service{endpoint:'content-v1.staging.api.e-travel.gr', name: 'content_service'});
+create (:Background_worker{name:'hotels_ x_sell_emailer'});
 create (:Background_worker{name:'AIR poster'});
 create (:Service{endpoint:'http://refundservice-v1.staging.api.e-travel.gr/',name:'Refund service'});
-create (:Scheduled_task{name:'Insurance CLI old'});
+create (:ScheduledTask{name:'Insurance CLI old'});
 create (:Service{endpoint:'http://currencyservice-v1.production.api.e-travel.gr',name:'Currency service v1'});
-create (:Scheduled_task{name:'Currencies updater v2'});
+create (:ScheduledTask{name:'Currencies updater v2'});
 create (:Background_runner{name:'Payment backlog'});
 create (:Background_worker{name:'RealMargin'});
 create (:Background_runner{name:'RM aggregator'});
-create (:Utility{name:'IURfanout'});
-create (:Service:Rest{endpoint:'http://content-v2.staging.api.e-travel.gr',name:'Content-v2'});
-create (:Service:Rest{endpoint:'http://hotels-v1.stage.api.e-travel.gr',name:'Hotels-v1'});
-create (:Service:Rest{endpoint:'http://hotels-v2.stage.api.e-travel.gr',name:'Hotels-v2'});
-create (:Service:HTTP{endpoint:'http://kumquat-v1.staging.api.e-travel.gr/api-v1.0/',name:'Kumquat API'});
-create (:Database{name:'CurrencyDB'});
+create (:Utility{name:'iur_fanout'});
+create (:Service:Rest{endpoint:'http://content_v2.staging.api.e-travel.gr',name:'content_v2'});
+create (:Service:Rest{endpoint:'http://hotels_v1.stage.api.e-travel.gr',name:'hotels_v1'});
+create (:Service:Rest{endpoint:'http://hotels_v2.stage.api.e-travel.gr',name:'hotels_v2'});
+create (:Service:Http{endpoint:'http://kumquat-v1.staging.api.e-travel.gr/api-v1.0/',name:'kumquat_api'});
+create (:Database{name:'currency_db'});
 
-match (a:Background_worker{name:'Hotels x-sell_emailer'}), (b:Service {name:'Hotels-v2'})
+match (a:Background_worker{name:'hotels_ x_sell_emailer'}), (b:Service {name:'hotels_v2'})
 create (b)-[:CALL]->(a);
 
-match (a:Service{name:'Refund service'}), (b:Application{name:'Panoramix'})
+match (a:Service{name:'refund_service'}), (b:Application{name:'panoramix'})
 create (a)-[:CALLED_BY]->(b);
 
-match (a:Scheduled_task{name:'Insurance CLI old'}), (b:Service {name:'Kumquat API'})
+match (a:ScheduledTask{name:'insurance_cli_old'}), (b:Service {name:'kumquat_api'})
 create (a)-[:SEND_TO]->(b);
 
-match (a:Service{name:'Currency service v1'}), (b:Database{name:'CurrencyDB'})
+match (a:Service{name:'currency_service_v1'}), (b:Database{name:'currency_db'})
 create (a)-[:DEPLOYED]->(b);
 
-match (a:Background_runner{name:'Currencies updater v2'}), (b:Database{name:'CurrencyDB'})
+match (a:Background_runner{name:'currencies_updater_v2'}), (b:Database{name:'currency_db'})
 create (a)-[:STORES_IN]->(b);
 
-match (a:Background_runner{name:'Payment backlog'}), (b:Database{name:'CommonInformation'})
+match (a:Background_runner{name:'payment_backlog'}), (b:Database{name:'common_information'})
 create (a)-[:READS_FROM]->(b);
 
 create (:Service{name:'AWS redrive'});
 
-match (a:Background_worker{name:'RealMargin'}), (b:Service{name:'AWS redrive'})
+match (a:Background_worker{name:'real_margin'}), (b:Service{name:'AWS redrive'})
 create (b)-[:SEND_TO]->(a);
+
+
+----
+
+//table
+
+//graph
+
 
 
 ----
