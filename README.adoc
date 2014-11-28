@@ -249,6 +249,12 @@ create (a)-[:HOSTS]->(b);
 match (a:Service {name: 'flights'}), (b:Database {name: 'dreamflight'})
 create (a)-[:STORES_IN]->(b);
 
+match (a:Service {name: 'flights'}), (b:Database {name: 'dreamflight'})
+create (a)-[:RETRIEVES_FROM{name: 'exchange_rates'}]->(b);
+
+match (a:Service {name: 'flights_ws'}), (b:Database {name: 'dreamflight'})
+create (a)-[:RETRIEVES_FROM{name: 'exchange_rates'}]->(b);
+
 match (a:Service {name: 'flights'}), (b:Database {name: 'affiliates'})
 create (a)-[:STORES_IN]->(b);
 
@@ -344,10 +350,13 @@ match (a:Service{name:'currency_service_v1'}), (b:Database{name:'currency_db'})
 create (a)-[:STORES_IN]->(b);
 
 match (a:ScheduledTask{name:'currencies_updater_v2'}), (b:Database{name:'dreamflight'})
-create (a)-[:STORES_IN]->(b);
+create (a)-[:STORES_IN{name:'exchange_rates'}]->(b);
 
 match (a:ScheduledTask{name:'currencies_updater_v2'}), (b:Service{name:'currency_service_v1'})
 create (a)-[:CALLS]->(b);
+
+match (a:ScheduledTask{name:'currencies_updater_v2'}), (b:Database{name:'currency_db'})
+create (a)-[:RETRIEVES_FROM{name:'exchange_rates'}]->(b);
 
 match (a:Background_runner{name:'payment_backlog'}), (b:Database{name:'common_information'})
 create (a)-[:READS_FROM]->(b);
