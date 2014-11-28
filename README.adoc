@@ -684,8 +684,8 @@ create (n)-[:OWNS]->(n2);
 
 
 
-MATCH (n)-[{name:"hotels_x_sell_email"}]->(m)
-return n, m;
+MATCH (n)-[r{name:"hotels_x_sell_email"}]->(m)
+return n, r.type, m;
 
 ----
 
