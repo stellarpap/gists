@@ -94,7 +94,7 @@ create (a)-[:READS_FROM]->(b);
 match (a:Service {name: 'to_kumquat_worker'}), (b:Service {name: 'kumquat'})
 create (a)-[:CALLS]->(b);
 
-match (a:DatabaseServer {brand: 'redis'}), (b:Database {name: 'hotels_email'})
+match (a:DatabaseServer {brand: 'redis'}), (b:Queue {name: 'hotels_email'})
 create (a)-[:HOSTS]->(b);
 
 match (a:Service {name: 'flights_rating_service_worker_service'}), (b:Server {name: 'pdback_staging'})
