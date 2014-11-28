@@ -485,6 +485,9 @@ create (a)-[:SENDS_TO]->(b);
 MATCH (n:Service )-[]->(m:Server)
 return n, m;
 
+MATCH (n:Application )-[]->(m:Server)
+return n, m;
+
 ----
 
 //table
