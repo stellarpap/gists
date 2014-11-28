@@ -399,7 +399,7 @@ create (a)-[:CALLS{endpoint:'flights-v2.staging.api.e-travel.gr',name:'data_base
 match (a:Background_worker{name:'hotels_ x_sell_emailer'}), (b:Service{name:'ui_v1'})
 create (a)-[:CALLS{endpoint:'ui-v1.dev.api.e-travel.gr/api/flights/reservations/:reservation_id/cross_selling.mail',name:'hotels_x_sell_email'}]->(b);
 
-match (a:Service{name:'ui_v1'}, (b:Service{name:'hotels_v2'})
+match (a:Service{name:'ui_v1'}), (b:Service{name:'hotels_v2'})
 create (a)-[:CALLS{name:'x_sell_hotels'}]->(b);
 
 match (a:ScheduledTask{name:'insurance_cli_old'}), (b:Service {name:'kumquat'})
