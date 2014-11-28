@@ -482,8 +482,11 @@ match (a:Service {name: 'kumquat'}), (b:Sns {name: 'sales'})
 create (a)-[:SENDS_TO]->(b);
 
 
-MATCH(n:Applications,m:Service)-[]->(m:Server)
+MATCH(n:Applications)-[]->(m:Server)
 return n,m;
+UNION
+MATCH (l:Service )-[]->(m:Server)
+return l, m;
 
 ----
 
