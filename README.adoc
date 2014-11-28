@@ -86,7 +86,6 @@ create (:Server{name:'ldiakopes1',endpoint:'ldiakopes1-staging.dc-staging.e-trav
 create (:Server{name:'ldiakopes2',endpoint:'ldiakopes2-staging-staging.dc-staging.e-travel.gr'});
 create (:Server{name:'ldiakopes_other',endpoint:'ldiakopes-other-staging.dc-staging.e-travel.gr'});
 //Panoramix
-create (:Module {name: 'KumquatModel'});
 create (:Database{name:'kumquat'});
 
 match (a:Service {name: 'to_kumquat_worker'}), (b:Server {name: 'pdback_staging'})
@@ -463,12 +462,6 @@ create (a)-[:DEPLOYED_ON]->(b);
 
 //Modules
 // -------
-
-match (a:Application{name:'panoramix'}), (b:Module{name:'KumquatModel'})
-create (a)-[:EMBEDS]->(b);
-
-match (a:Service{name:'kumquat'}), (b:Module{name:'KumquatModel'})
-create (a)-[:EMBEDS]->(b);
 
 match (a:Service{name:'kumquat'}), (b:Database{name:'Kumquat'})
 create (a)-[:STORES_IN]->(b);
