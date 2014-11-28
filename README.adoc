@@ -78,10 +78,13 @@ create (:Service:Rest{endpoint:'http://hotels_v2.stage.api.e-travel.gr',name:'ho
 create (:Service:Rest{endpoint:'http://kumquat-v1.staging.api.e-travel.gr/api-v1.0/',name:'kumquat'});
 create (:Database{name:'currency_db'});
 //LeWeb
-create (:Application:Web{name:'leAdmin',Endpoint:' http://admin.staging.e-travel.gr'});
-create (:Application:Web{name:'leSSO',Endpoint:'http://lesso.staging.e-travel.gr'});
+create (:Application:Web{name:'leadmin',endpoint:' http://admin.staging.e-travel.gr'});
+create (:Application:Web{name:'lesso',endpoint:'http://lesso.staging.e-travel.gr'});
 create (:Service:Rest{endpoint:'ui-v1.dev.api.e-travel.gr',name:'ui_v1'});
-create (:Service{endpoint:' http://nps-v1.staging.api.e-travel.gr', name: 'npsApi'});
+create (:Service{endpoint:' http://nps-v1.staging.api.e-travel.gr', name: 'npsapi'});
+create (:Server{name:'ldiakopes1',endpoint:'ldiakopes1-staging.dc-staging.e-travel.gr'});
+create (:Server{name:'ldiakopes2',endpoint:'ldiakopes2-staging-staging.dc-staging.e-travel.gr'});
+create (:Server{name:'ldiakopes_other',endpoint:'ldiakopes-other-staging.dc-staging.e-travel.gr'});
 //Panoramix
 create (:Module {name: 'KumquatModel'});
 
@@ -432,15 +435,24 @@ create (a)-[:SEND_TO]->(b);
 match (a:Service {name: 'content_v2'}), (b:DatabaseServer {brand: 'couch_db'})
 create (a)-[:STORES_IN]->(b);
 
-match (a:Service {name: 'content_v2'}), (b:Application {name: 'leAdmin'})
+match (a:Service {name: 'content_v2'}), (b:Application {name: 'leadmin'})
 create (a)-[:CALLED_BY]->(b);
 
-match (a:Application {name: 'leSSO'}), (b:Application {name: 'leweb'})
+match (a:Application {name: 'lesso'}), (b:Application {name: 'leweb'})
 create (a)-[:CALLED_BY]->(b);
 
-match (a:Service {name: 'npsApi'}), (b:Application {name: 'leweb'})
+match (a:Service {name: 'npsapi'}), (b:Application {name: 'leweb'})
 create (a)-[:CALLED_BY]->(b);
 
+match (a:Application {name: 'leweb'}), (b:Server {name: 'ldiakopes1'})
+create (a)-[:DEPLOYED_ON]->(b);
+match (a:Application {name: 'leweb'}), (b:Server {name: 'ldiakopes2'})
+create (a)-[:DEPLOYED_ON]->(b);
+
+match (a:Application {name: 'leadmin'}), (b:Server {name: 'ldiakopes_other'})
+create (a)-[:DEPLOYED_ON]->(b);
+match (a:Application {name: 'lesso'}), (b:Server {name: 'ldiakopes_other'})
+create (a)-[:DEPLOYED_ON]->(b);
 
 //Panoramix
 
@@ -681,11 +693,6 @@ create (n)-[:BELONGS_TO {name: 'flight_refund'}]->(n2);
 match (n:Module {name: 'KumquatModel'}), 
       (n2:BusinessEntity {name: 'FlightReservation'})
 create (n)-[:OWNS]->(n2);
-
-
-
-MATCH (n)-[r{name:"hotels_x_sell_email"}]->(m)
-return n.name, type(r), m.name, labels(m);
 
 ----
 
