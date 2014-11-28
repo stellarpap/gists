@@ -58,8 +58,40 @@ create (:Application:PaliaMalakia{name:'old_crm'});
 create (:ScheduledTask{name:'sabre_pool_agent'});
 create (:Service:Windows{name:'autoticketing_service_worker'});
 create (:Queue{name:'autoticketing'});
+create (:Service:Windows{name:'flights_rating_service_worker_service'});
+create (:Service{endpoint:'content-v1.staging.api.e-travel.gr', name: 'content_service'});
+create (:Background_worker{name:'hotels_ x_sell_emailer'});
+create (:Background_worker{name:'AIR poster'});
+create (:Service{endpoint:'http://refundservice-v1.staging.api.e-travel.gr/',name:'Refund service'});
+create (:ScheduledTask{name:'Insurance CLI old'});
+create (:Service{endpoint:'http://currencyservice-v1.production.api.e-travel.gr',name:'Currency service v1'});
+create (:ScheduledTask{name:'Currencies updater v2'});
+create (:Background_runner{name:'Payment backlog'});
+create (:Background_worker{name:'RealMargin'});
+create (:Background_runner{name:'RM aggregator'});
+create (:Utility{name:'iur_fanout'});
+create (:Service:Rest{endpoint:'http://content_v2.staging.api.e-travel.gr',name:'content_v2'});
+create (:Service:Rest{endpoint:'http://hotels_v1.stage.api.e-travel.gr',name:'hotels_v1'});
+create (:Service:Rest{endpoint:'http://hotels_v2.stage.api.e-travel.gr',name:'hotels_v2'});
+create (:Service:Rest{endpoint:'http://kumquat-v1.staging.api.e-travel.gr/api-v1.0/',name:'kumquat'});
+create (:Database{name:'currency_db'});
+create (:Service:Windows{name:'to_kumquat_worker'});
+
+match (a:Service {name: 'to_kumquat_worker'}), (b:Server {name: 'pdback_staging'})
+create (a)-[:DEPLOYED_ON]->(b);
+
+match (a:Service {name: 'to_kumquat_worker'}), (b:Queue {name: 'flight_to_kumquat'})
+create (a)-[:READS_FROM]->(b);
+
+match (a:Service {name: 'to_kumquat_worker'}), (b:Service {name: 'kumquat'})
+create (a)-[:CALLS]->(b);
 
 
+match (a:Service {name: 'flights_rating_service_worker_service'}), (b:Server {name: 'pdback_staging'})
+create (a)-[:DEPLOYED_ON]->(b);
+
+match (a:Service {name: 'flights_rating_service_worker_service'}), (b:Queue {name: 'flight_rating'})
+create (a)-[:READS_FROM]->(b);
 
 match (a:Service {name: 'autoticketing_service_worker'}), (b:Server {name: 'pdback_staging'})
 create (a)-[:DEPLOYED_ON]->(b);
@@ -299,37 +331,17 @@ create (a)-[:CALLS]->(b);
 match (a:Application {name: 'ios'}) , (b:Service {name: 'flights'})
 create (a)-[:CALLS]->(b);
 
-
-
-
-create (:Service{endpoint:'content-v1.staging.api.e-travel.gr', name: 'content_service'});
-create (:Background_worker{name:'hotels_ x_sell_emailer'});
-create (:Background_worker{name:'AIR poster'});
-create (:Service{endpoint:'http://refundservice-v1.staging.api.e-travel.gr/',name:'Refund service'});
-create (:ScheduledTask{name:'Insurance CLI old'});
-create (:Service{endpoint:'http://currencyservice-v1.production.api.e-travel.gr',name:'Currency service v1'});
-create (:ScheduledTask{name:'Currencies updater v2'});
-create (:Background_runner{name:'Payment backlog'});
-create (:Background_worker{name:'RealMargin'});
-create (:Background_runner{name:'RM aggregator'});
-create (:Utility{name:'iur_fanout'});
-create (:Service:Rest{endpoint:'http://content_v2.staging.api.e-travel.gr',name:'content_v2'});
-create (:Service:Rest{endpoint:'http://hotels_v1.stage.api.e-travel.gr',name:'hotels_v1'});
-create (:Service:Rest{endpoint:'http://hotels_v2.stage.api.e-travel.gr',name:'hotels_v2'});
-create (:Service:Http{endpoint:'http://kumquat-v1.staging.api.e-travel.gr/api-v1.0/',name:'kumquat_api'});
-create (:Database{name:'currency_db'});
-
 match (a:Background_worker{name:'hotels_ x_sell_emailer'}), (b:Service {name:'hotels_v2'})
 create (b)-[:CALL]->(a);
 
 match (a:Service{name:'refund_service'}), (b:Application{name:'panoramix'})
 create (a)-[:CALLED_BY]->(b);
 
-match (a:ScheduledTask{name:'insurance_cli_old'}), (b:Service {name:'kumquat_api'})
+match (a:ScheduledTask{name:'insurance_cli_old'}), (b:Service {name:'kumquat'})
 create (a)-[:SEND_TO]->(b);
 
 match (a:Service{name:'currency_service_v1'}), (b:Database{name:'currency_db'})
-create (a)-[:DEPLOYED]->(b);
+create (a)-[:STORES_IN]->(b);
 
 match (a:Background_runner{name:'currencies_updater_v2'}), (b:Database{name:'currency_db'})
 create (a)-[:STORES_IN]->(b);
