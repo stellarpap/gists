@@ -350,11 +350,11 @@ create (a)-[:DEPLOYED_ON]->(b);
 match (a:Service {name: 'affiliates'}), (b:Database {name: 'affiliates'})
 create (a)-[:STORES_IN]->(b);
 
-match (a:Service{name:'refund_service'}), (b:Application{name:'panoramix'})
-create (a)-[:CALLED_BY{endpoint:'http://refundservice-v1.production.api.e-travel.gr/refund?format=json',name:'refund_transaction'}]->(b);
+match (a:Application{name:'panoramix'}), (b:Service{name:'refund_service'})
+create (a)-[:CALLS{endpoint:'http://refundservice-v1.production.api.e-travel.gr/refund?format=json',name:'refund_transaction'}]->(b);
 
-match (a:Service{name:'my_bookings'}), (b:Application{name:'panoramix'})
-create (a)-[:CALLED_BY{endpoint:'http://mybookings-v1.production.api.e-travel.gr/payments',name:'extra_payment'}]->(b);
+match (a:Application{name:'panoramix'}), (b:Service{name:'my_bookings'})
+create (a)-[:CALLS{endpoint:'http://mybookings-v1.production.api.e-travel.gr/payments',name:'extra_payment'}]->(b);
 
 match (a:Application{name:'panoramix'}), (b:Service{name:'flights'})
 create (a)-[:CALLS{endpoint:'http://flights-v1.production.api.e-travel.gr/RequestTicketing',name:'issue_ticket'}]->(b);
