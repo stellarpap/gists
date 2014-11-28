@@ -374,15 +374,16 @@ create (a)-[:SEND_TO]->(b);
 
 //Panoramix
 
+
+//Modules
+// -------
+create (:Module {name: 'KumquatModel'});
+
 match (a:Application{name:'panoramix'}), (b:Module{name:'KumquatModel'})
 create (a)-[:EMBEDS]->(b);
 
 match (a:Service{name:'kumquat'}), (b:Module{name:'KumquatModel'})
 create (a)-[:EMBEDS]->(b);
-
-//Modules
-// -------
-create (:Module {name: 'KumquatModel'});
 
 // BusinessEntities
 // ----------------
