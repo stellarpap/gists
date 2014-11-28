@@ -391,7 +391,7 @@ match (a:Application{name:'panoramix'}), (b:Service{name:'ui_v1'})
 create (a)-[:CALLS{endpoint:'ui-v1.dev.api.e-travel.gr/api/my/invoices/:invoice_id.mail',name:'invoice_email'}]->(b);
 
 match (a:Background_worker{name:'hotels_ x_sell_emailer'}), (b:Queue{name:'hotels_email'})
-create (a)-[:RETRIEVS_FROM{name:'hotels_x_sell_email'}]->(b);
+create (a)-[:RETRIEVES_FROM{name:'hotels_x_sell_email'}]->(b);
 
 match (a:Background_worker{name:'hotels_ x_sell_emailer'}), (b:Service{name:'flights'})
 create (a)-[:CALLS{endpoint:'flights-v2.staging.api.e-travel.gr',name:'hotels_x_sell_email'}]->(b);
@@ -685,7 +685,7 @@ create (n)-[:OWNS]->(n2);
 
 
 MATCH (n)-[r{name:"hotels_x_sell_email"}]->(m)
-return n, type(r), m;
+return name(n), type(r), name(m);
 
 ----
 
