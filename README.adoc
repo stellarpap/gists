@@ -685,7 +685,7 @@ create (n)-[:OWNS]->(n2);
 
 
 MATCH (n)-[r{name:"hotels_x_sell_email"}]->(m)
-return name(n), type(r), name(m);
+return n.name, type(r), m.name;
 
 ----
 
