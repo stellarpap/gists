@@ -463,16 +463,16 @@ create (a)-[:DEPLOYED_ON]->(b);
 //Modules
 // -------
 
-match (a:Service{name:'kumquat'}), (b:Database{name:'Kumquat'})
+match (a:Service{name:'kumquat'}), (b:Database{name:'kumquat'})
 create (a)-[:STORES_IN]->(b);
 
-match (a:Application{name:'panoramix'}), (b:Database{name:'Kumquat'})
+match (a:Application{name:'panoramix'}), (b:Database{name:'kumquat'})
 create (a)-[:STORES_IN]->(b);
 
-match (a:Service{name:'kumquat'}), (b:Database{name:'Kumquat'})
+match (a:Service{name:'kumquat'}), (b:Database{name:'kumquat'})
 create (a)-[:READS_FROM]->(b);
 
-match (a:Application{name:'panoramix'}), (b:Database{name:'Kumquat'})
+match (a:Application{name:'panoramix'}), (b:Database{name:'kumquat'})
 create (a)-[:READS_FROM]->(b);
 
 
