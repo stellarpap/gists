@@ -133,7 +133,7 @@ create (a)-[:STORES_IN]->(b);
 match (a:Service {name: 'flights'}), (b:Service {name: 'rapida'})
 create (a)-[:CALLS]->(b);
 
-match (a:Service {name: 'rapida'}), (b:Server {name: sdiak_staging})
+match (a:Service {name: 'rapida'}), (b:Server {name: 'sdiak_staging'})
 create (a)-[:DEPLOYED_ON]->(b);
 
 match (a:Service {name: 'affiliates'}), (b:Database {name: 'affiliates'})
@@ -169,13 +169,13 @@ create (a)-[:STORES_IN]->(b);
 match (a:Service {name: 'flights_ws'}), (b:Server {name: 'awsdiak_staging'})
 create (a)-[:DEPLOYED_ON]->(b);
 
-match (a:Service {name: 'flights'}), (b:Server {name: sdiak_staging})
+match (a:Service {name: 'flights'}), (b:Server {name: 'sdiak_staging'})
 create (a)-[:DEPLOYED_ON]->(b);
 
-match (a:Service {name: 'affiliates'}), (b:Server {name: sdiak_staging})
+match (a:Service {name: 'affiliates'}), (b:Server {name: 'sdiak_staging'})
 create (a)-[:DEPLOYED_ON]->(b);
 
-match (a:Service {name: 'my_bookings'}), (b:Server {name: sdiak_staging})
+match (a:Service {name: 'my_bookings'}), (b:Server {name: 'sdiak_staging'})
 create (a)-[:DEPLOYED_ON]->(b);
 
 match (a:DatabaseServer {brand: 'mssql'}), (b:Database {name: 'dreamflight'})
