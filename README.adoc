@@ -188,7 +188,7 @@ match (a:Service {name: 'flights_ws'}), (b:Database {name: 'sabre_session'})
 create (a)-[:STORES_IN]->(b);
 
 match (a:Service {name: 'flights_ws'}), (b:Database {name: 'affiliates'})
-create (a)-[:STORES_IN]->(b);
+create (a)-[:READS_FROM]->(b);
 
 match (a:Service {name: 'flights_ws'}), (b:Server {name: 'awsdiak_staging'})
 create (a)-[:DEPLOYED_ON]->(b);
@@ -249,6 +249,9 @@ create (a)-[:RETRIEVES_FROM{name: 'exchange_rates'}]->(b);
 
 match (a:Service {name: 'flights'}), (b:Database {name: 'affiliates'})
 create (a)-[:STORES_IN]->(b);
+
+match (a:Service {name: 'flights'}), (b:Database {name: 'affiliates'})
+create (a)-[:READS_FROM]->(b);
 
 match (a:Service {name: 'flights'}), (b:Database {name: 'common_information'})
 create (a)-[:STORES_IN]->(b);
