@@ -368,17 +368,17 @@ create (a)-[:READS_FROM]->(b);
 
 create (:Service{name:'AWS redrive'});
 
-match (a:Background_worker{name:'real_margin'}), (b:Service{name:'AWS redrive'})
-create (b)-[:SEND_TO]->(a);
+match (a:Service{name:'AWS redrive'}), (b:Background_worker{name:'real_margin'})
+create (a)-[:SEND_TO]->(b);
 
 
 //Panoramix
+
 match (a:Application{name:'panoramix'}), (b:Module{name:'KumquatModel'})
-create (b)-[:EMBEDS]->(a);
+create (a)-[:EMBEDS]->(b);
 
 match (a:Service{name:'kumquat'}), (b:Module{name:'KumquatModel'})
-create (b)-[:EMBEDS]->(a);
-
+create (a)-[:EMBEDS]->(b);
 
 //Modules
 // -------
