@@ -684,7 +684,7 @@ create (n)-[:OWNS]->(n2);
 
 
 
-MATCH (n)-[x{name:"hotels_x_sell}]->(m)
+MATCH (n)-[x{name:"hotels_x_sell"}]->(m)
 return n, m;
 
 ----
