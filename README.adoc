@@ -35,7 +35,7 @@ create (:Queue:Redis{name:'flight_to_crm'});
 create (:Queue:Redis{name:'flights_confirmation_email'});
 create (:Queue:Redis{name:'flight_rating'});
 create (:Queue:Redis{name:'flight_to_kumquat'});
-create (:Application:Web{name:'leweb'});
+create (:Application:Web{name:'leweb',Endpoint:'http://wwwpamediakopesgr.staging.e-travel.gr'});
 create (:Application:Web{name:'panoramix'});
 create (:Application:Mobile{name:'android'});
 create (:Application:Mobile{name:'ios'});
@@ -301,7 +301,6 @@ create (a)-[:CALLS]->(b);
 
 
 //Services
-create (:Service{endpoint:'content-v1.staging.api.e-travel.gr', name: 'content_service'});
 create (:Background_worker{name:'hotels_ x_sell_emailer'});
 create (:Background_worker{name:'air_poster'});
 create (:Service{endpoint:'http://refundservice-v1.staging.api.e-travel.gr/',name:'refund_service'});
@@ -370,6 +369,30 @@ create (:Service{name:'AWS redrive'});
 
 match (a:Service{name:'AWS redrive'}), (b:Background_worker{name:'real_margin'})
 create (a)-[:SEND_TO]->(b);
+
+
+//LeWeb
+create (:Application:Web{name:'leAdmin',Endpoint:' http://admin.staging.e-travel.gr'});
+
+match (a:Service {name: 'content_v2'}), (b:DatabaseServer {brand: 'couch_db'})
+create (a)-[:STORES_IN]->(b);
+
+match (a:Service {name: 'content_v2'}), (b:Application {name: 'leAdmin'})
+create (a)-[:CALLED_BY]->(b);
+
+create (:Application:Web{name:'leSSO',Endpoint:'http://lesso.staging.e-travel.gr'});
+match (a:Service {name: 'leSSO'}), (b:Application {name: 'leweb'})
+create (a)-[:CALLED_BY]->(b);
+
+
+
+create (:Service{endpoint:'http://mail-v1.staging.api.e-travel.gr', name: 'mailApi'});
+match (a:Service {name: 'mailApi'}), (b:Application {name: 'panoramix'})
+create (a)-[:CALLED_BY]->(b);
+
+create (:Service{endpoint:' http://nps-v1.staging.api.e-travel.gr', name: 'npsApi'});
+match (a:Service {name: 'npsApi'}), (b:Application {name: 'leweb'})
+create (a)-[:CALLED_BY]->(b);
 
 
 //Panoramix
