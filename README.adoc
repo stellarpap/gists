@@ -441,6 +441,9 @@ create (a)-[:CALLED_BY]->(b);
 match (a:Application {name: 'lesso'}), (b:Application {name: 'leweb'})
 create (a)-[:CALLED_BY]->(b);
 
+match (a:Application {name: 'lesso'}), (b:Application {name: 'panoramix'})
+create (a)-[:CALLED_BY]->(b);
+
 match (a:Service {name: 'npsapi'}), (b:Application {name: 'leweb'})
 create (a)-[:CALLED_BY]->(b);
 
