@@ -6,7 +6,7 @@ This repo contains content for use at http://gist.neo4j.org/.
 
 [source,cypher]
 ----
-//Flights Service v2
+//Flights Service
 create (:Service:Rest{Endpoint:'http://flights-v2.staging.api.e-travel.gr',name:'flights'});
 create (:Server{name:'sdiak_staging',ip:'10.227.1.47'});
 create (:DatabaseServer{brand:'mssql'});
@@ -59,23 +59,6 @@ create (:ScheduledTask{name:'sabre_pool_agent'});
 create (:Service:Windows{name:'autoticketing_service_worker'});
 create (:Queue:Redis{name:'autoticketing'});
 create (:Service:Windows{name:'flights_rating_service_worker_service'});
-create (:Service{endpoint:'content-v1.staging.api.e-travel.gr', name: 'content_service'});
-create (:Background_worker{name:'hotels_ x_sell_emailer'});
-create (:Background_worker{name:'air_poster'});
-create (:Service{endpoint:'http://refundservice-v1.staging.api.e-travel.gr/',name:'refund_service'});
-create (:ScheduledTask{name:'insurance_cli_old'});
-create (:Service{endpoint:'http://currencyservice-v1.production.api.e-travel.gr',name:'currency_service_v1'});
-create (:ScheduledTask{name:'currencies_updater_v2'});
-create (:Background_runner{name:'payment_backlog'});
-create (:Background_worker{name:'real_margin'});
-create (:Background_runner{name:'rm_aggregator'});
-create (:Utility{name:'iur_fanout'});
-create (:Service:Rest{endpoint:'http://content_v2.staging.api.e-travel.gr',name:'content_v2'});
-create (:Service:Rest{endpoint:'http://hotels_v1.stage.api.e-travel.gr',name:'hotels_v1'});
-create (:Service:Rest{endpoint:'http://hotels_v2.stage.api.e-travel.gr',name:'hotels_v2'});
-create (:Service:Rest{endpoint:'http://kumquat-v1.staging.api.e-travel.gr/api-v1.0/',name:'kumquat'});
-create (:Database{name:'currency_db'});
-create (:Service:Windows{name:'to_kumquat_worker'});
 
 match (a:Service {name: 'to_kumquat_worker'}), (b:Server {name: 'pdback_staging'})
 create (a)-[:DEPLOYED_ON]->(b);
@@ -138,24 +121,6 @@ create (a)-[:CALLS]->(b);
 match (a:ScheduledTask {name: 'auto_cancel_pnr'}), (b:Database {name: 'dreamflight'})
 create (a)-[:READS_FROM]->(b);
 
-match (a:ScheduledTask {name: 'affiliates_sales_updater'}), (b:Server {name: 'pdback_staging'})
-create (a)-[:DEPLOYED_ON]->(b);
-
-match (a:ScheduledTask {name: 'affiliates_sales_updater'}), (b:Sns {name: 'sales'})
-create (a)-[:READS_FROM]->(b);
-
-match (a:ScheduledTask {name: 'affiliates_sales_updater'}), (b:Database {name: 'affiliates'})
-create (a)-[:STORES_IN]->(b);
-
-match (a:Application {name: 'affiliates'}), (b:Server {name: 'webdiak_staging'})
-create (a)-[:DEPLOYED_ON]->(b);
-
-match (a:Application {name: 'affiliates'}), (b:Database {name: 'affiliates'})
-create (a)-[:STORES_IN]->(b);
-
-match (a:Application {name: 'my_bookings'}), (b:Server {name: 'webdiak_staging'})
-create (a)-[:DEPLOYED_ON]->(b);
-
 match (a:Application {name: 'dfa'}), (b:Server {name: 'webdiak_staging'})
 create (a)-[:DEPLOYED_ON]->(b);
 
@@ -167,9 +132,6 @@ create (a)-[:CALLS]->(b);
 
 match (a:Service {name: 'rapida'}), (b:Server {name: 'sdiak_staging'})
 create (a)-[:DEPLOYED_ON]->(b);
-
-match (a:Service {name: 'affiliates'}), (b:Database {name: 'affiliates'})
-create (a)-[:STORES_IN]->(b);
 
 match (a:Application {name: 'metasearchers'}) , (b:Service {name: 'flights_ws'})
 create (a)-[:CALLED_BY]->(b);
@@ -337,6 +299,49 @@ create (a)-[:CALLS]->(b);
 match (a:Application {name: 'ios'}) , (b:Service {name: 'flights'})
 create (a)-[:CALLS]->(b);
 
+
+//Services
+create (:Service{endpoint:'content-v1.staging.api.e-travel.gr', name: 'content_service'});
+create (:Background_worker{name:'hotels_ x_sell_emailer'});
+create (:Background_worker{name:'air_poster'});
+create (:Service{endpoint:'http://refundservice-v1.staging.api.e-travel.gr/',name:'refund_service'});
+create (:ScheduledTask{name:'insurance_cli_old'});
+create (:Service{endpoint:'http://currencyservice-v1.production.api.e-travel.gr',name:'currency_service_v1'});
+create (:ScheduledTask{name:'currencies_updater_v2'});
+create (:Background_runner{name:'payment_backlog'});
+create (:Background_worker{name:'real_margin'});
+create (:Background_runner{name:'rm_aggregator'});
+create (:Utility{name:'iur_fanout'});
+create (:Service:Rest{endpoint:'http://content_v2.staging.api.e-travel.gr',name:'content_v2'});
+create (:Service:Rest{endpoint:'http://hotels_v1.stage.api.e-travel.gr',name:'hotels_v1'});
+create (:Service:Rest{endpoint:'http://hotels_v2.stage.api.e-travel.gr',name:'hotels_v2'});
+create (:Service:Rest{endpoint:'http://kumquat-v1.staging.api.e-travel.gr/api-v1.0/',name:'kumquat'});
+create (:Database{name:'currency_db'});
+create (:Service:Windows{name:'to_kumquat_worker'});
+
+
+match (a:ScheduledTask {name: 'affiliates_sales_updater'}), (b:Server {name: 'pdback_staging'})
+create (a)-[:DEPLOYED_ON]->(b);
+
+match (a:ScheduledTask {name: 'affiliates_sales_updater'}), (b:Sns {name: 'sales'})
+create (a)-[:READS_FROM]->(b);
+
+match (a:ScheduledTask {name: 'affiliates_sales_updater'}), (b:Database {name: 'affiliates'})
+create (a)-[:STORES_IN]->(b);
+
+match (a:Application {name: 'affiliates'}), (b:Server {name: 'webdiak_staging'})
+create (a)-[:DEPLOYED_ON]->(b);
+
+match (a:Application {name: 'affiliates'}), (b:Database {name: 'affiliates'})
+create (a)-[:STORES_IN]->(b);
+
+match (a:Application {name: 'my_bookings'}), (b:Server {name: 'webdiak_staging'})
+create (a)-[:DEPLOYED_ON]->(b);
+
+
+match (a:Service {name: 'affiliates'}), (b:Database {name: 'affiliates'})
+create (a)-[:STORES_IN]->(b);
+
 match (a:Background_worker{name:'hotels_ x_sell_emailer'}), (b:Service {name:'hotels_v2'})
 create (b)-[:CALL]->(a);
 
@@ -367,7 +372,15 @@ match (a:Background_worker{name:'real_margin'}), (b:Service{name:'AWS redrive'})
 create (b)-[:SEND_TO]->(a);
 
 
-// Modules
+//Panoramix
+match (a:Application{name:'panoramix'}), (b:Module{name:'KumquatModel'})
+create (b)-[:EMBEDS]->(a);
+
+match (a:Service{name:'kumquat'}), (b:Module{name:'KumquatModel'})
+create (b)-[:EMBEDS]->(a);
+
+
+//Modules
 // -------
 create (:Module {name: 'KumquatModel'});
 
