@@ -381,7 +381,7 @@ match (a:Service {name: 'content_v2'}), (b:Application {name: 'leAdmin'})
 create (a)-[:CALLED_BY]->(b);
 
 create (:Application:Web{name:'leSSO',Endpoint:'http://lesso.staging.e-travel.gr'});
-match (a:Service {name: 'leSSO'}), (b:Application {name: 'leweb'})
+match (a:Application {name: 'leSSO'}), (b:Application {name: 'leweb'})
 create (a)-[:CALLED_BY]->(b);
 
 
